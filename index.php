@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>hallo</h1>
-
+    <div class>
+        <h1 class="title">game of live</h1>
+        <button class="buttoncontinue">start</button>
+    </div>
 </body>
 </html>

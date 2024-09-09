@@ -39,8 +39,12 @@ body::before {
     }
 }
 
-h1 {
+.title {
     color: white;
+    display: flex;
+    justify-content: center;
+    z-index: 0;
+    position: relative;
 }
 
 img[alt="first"] {
