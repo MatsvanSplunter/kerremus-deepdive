@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>hallo</h1>
 
 </body>
 </html>
