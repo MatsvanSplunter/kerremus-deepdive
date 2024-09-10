@@ -13,7 +13,8 @@ const bord = [];
 document.querySelectorAll('tr').forEach((tableRow, index) => {
     const cellenInRow = tableRow.querySelectorAll('td');
     bord[index] = cellenInRow;
-    size = index;
+    width = index;
+    height = cellenInRow.length;
 });
 
 for (let x = 0; x < size; x += 1) {
@@ -75,8 +76,8 @@ for (let x = 0; x < size; x += 1) {
 function simulate () {
     let celstrue = [];
     let celsfalse = [];
-    for (let x = 0; x < size; x = x + 1) {
-        for (let y = 0; y < size; y = y + 1) {
+    for (let x = 0; x < width; x = x + 1) {
+        for (let y = 0; y < height; y = y + 1) {
             omringt = 0;
             let cel;
             if (x != 0) {
@@ -86,7 +87,7 @@ function simulate () {
                 }
                 cel = bord[x-1][y];
                 omringt = checkcel(cel.classList, omringt);
-                if (y != size - 1) {
+                if (y != height - 1) {
                     cel = bord[x-1][y+1];
                     omringt = checkcel(cel.classList, omringt);
                 }
@@ -95,18 +96,18 @@ function simulate () {
                 cel = bord[x][y-1];
                 omringt = checkcel(cel.classList, omringt);
             }
-            if (y != size - 1) {
+            if (y != height - 1) {
                 cel = bord[x][y+1];
                 omringt = checkcel(cel.classList, omringt);
             }
-            if (x != size - 1) {
+            if (x != width - 1) {
                 if (y != 0) {
                     cel = bord[x+1][y-1];
                     omringt = checkcel(cel.classList, omringt);
                 }
                 cel = bord[x+1][y];
                 omringt = checkcel(cel.classList, omringt);
-                if (y != size - 1) {
+                if (y != height - 1) {
                     cel = bord[x+1][y+1];
                     omringt = checkcel(cel.classList, omringt);
                 }
