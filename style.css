@@ -18,7 +18,7 @@ body::before {
     height: 100%;
     background-size: cover;
     background-position: center;
-    opacity: 0.4;
+    opacity: 0.2;
     animation: carousel 12s infinite; /* Carousel animation */
     z-index: -1; /* Make sure background stays behind content */
 }
@@ -39,9 +39,80 @@ body::before {
     }
 }
 
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  .neon-btn {
+      padding: 20px 30px;
+      background: transparent;
+      border: 3px solid #f3eaff;
+      border-radius: 50px;
+      margin-top: 3vh;
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 32px;
+      text-decoration: none;
+      color: #fff;
+      width: 15vw;
+      text-shadow: 0 0 5px #da8fff, 0 0 10px #da8fff, 0 0 20px #da8fff, 0 0 30px #da8fff, 0 0 40px #da8fff, 0 0 55px #da8fff, 0 0 75px #da8fff;
+      transition: all .4s ease-out;
+      box-shadow: 0 0 7px 0 #70078e, 0 0 5px 2px #70078e, inset 0 0 7px 0 #70078e, inset 0 0 5px 1px #70078e;
+      opacity: 0;
+      animation: zoomOutFlash 2s forwards;
+  }
+  
+  .neon-btn:nth-child(1) {
+      animation-delay: 0.5s;
+  }
+  .neon-btn:nth-child(2) {
+      animation-delay: 1s;
+  }
+  .neon-btn:nth-child(3) {
+      animation-delay: 1.5s;
+  }
+  
+  .neon-btn::before {
+      content: '';
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      border-radius: 50px;
+      transition: all 200ms ease-in-out;
+      transform: scale(1.2);
+  }
+  
+  .neon-btn:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 20px rgb(0, 141, 143), 0 0 30px rgb(0, 251, 255), inset 0 0 7px rgb(0, 251, 255);
+    text-shadow: 0 0 5px rgb(0, 141, 143), 0 0 10px rgb(0, 141, 143), 0 0 20px rgb(0, 141, 143), 0 0 30px rgb(0, 141, 143), 0 0 40px rgb(0, 141, 143), 0 0 55px #da8fff, 0 0 75px #da8fff;
+
+}
+  
+  @keyframes zoomOutFlash {
+      0% {
+          opacity: 0;
+          transform: scale(4);
+      }
+      50% {
+          opacity: 1;
+          transform: scale(1);
+      }
+      100% {
+          opacity: 1;
+          transform: scale(1);
+      }
+  }
+  
+
 /* Styling for the title */
 .title {
-    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,3 +123,22 @@ body::before {
     text-align: center;
     flex-direction: column; 
 }
+
+.zoom-flash h1 {
+    font-family: Arial, sans-serif;
+    font-size: 3rem;
+    color: #ffffff;
+    text-shadow: 0 0 5px #da8fff, 0 0 10px #da8fff, 0 0 20px #da8fff, 0 0 30px #da8fff, 0 0 40px #da8fff, 0 0 55px #da8fff, 0 0 75px #da8fff;
+    animation: zoomInFlash 2.5s backwards;
+  }
+
+  @keyframes zoomInFlash {
+    0% {
+      opacity: 0;
+      transform: scale(4);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
