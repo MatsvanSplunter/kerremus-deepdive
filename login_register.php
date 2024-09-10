@@ -1,6 +1,6 @@
 <?php
 error_reporting(0);
-if ($_GET["login/register"] == 'login') {
+if ($_GET["login_register"] == 'login') {
 
         include_once("connect.php");
         $dbhost = "localhost";
