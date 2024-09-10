@@ -7,30 +7,8 @@ $celsize = 25;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="game.css">
     <title>Document</title>
-    <style>
-        .true {
-            background-color: yellow;
-        }
-        .false {
-            background-color: grey;
-        }
-        td {
-            width: <?=$celsize?>px;
-            height: <?=$celsize?>px;
-        }
-        body {
-            width: max-content;
-        }
-        button, input {
-            display: flex;
-            position: relative;
-        }
-        div {
-            display: flex;
-            position: absolute;
-        }
-    </style>
 </head>
 <body>
     <div>
