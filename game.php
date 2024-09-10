@@ -1,5 +1,5 @@
 <?php
-$size = 100;
+$size = 50;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,8 +15,8 @@ $size = 100;
             background-color: grey;
         }
         td {
-            width: 45px;
-            height: 45px;
+            width: 25px;
+            height: 25px;
         }
         body {
             width: max-content;
@@ -37,7 +37,7 @@ $size = 100;
                 <?php
                 for ($col = 0; $col < $size; $col++) {
                     ?>
-                    <td class="false" id="<?=$row?>, <?=$col?>"><?=$row?>, <?=$col?></td>
+                    <td class="false" id="<?=$row?>, <?=$col?>"></td>
                     <?php
                 }
                 ?>
