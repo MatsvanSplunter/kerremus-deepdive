@@ -46,15 +46,10 @@ body {
 /* Background carousel */
 body::before {
     content: "";
-    position: fixed; /* Fix the background so it doesn't move */
-    top: 0;
-    left: 0;
     width: 100%;
     background-size: cover;
     background-position: center;
     opacity: 0.2;
-    animation: carousel 12s infinite; /* Carousel animation */
-    z-index: -1; /* Make sure background stays behind content */
     width: max-content;
 
 }
