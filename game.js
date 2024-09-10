@@ -1,61 +1,61 @@
-for (let x = 0; x < 100; x = x + 1) {
-    for (let y = 0; y < 100; y = y + 1) {
-        let cel = document.getElementById(`${x}, ${y}`);
-        cel.addEventListener("click", function () {
-            if(cel.classList == "true") {
-                cel.classList = "false";
+let size;
+
+const bord = [];
+document.querySelectorAll('tr').forEach((tableRow, index) => {
+    const cellenInRow = tableRow.querySelectorAll('td');
+    bord[index] = cellenInRow;
+    size = index;
+})
+
+for (let x = 0; x < size; x += 1) {
+    for (let y = 0; y < size; y += 1) {
+        bord[x][y].addEventListener("click", function () {
+            if(bord[x][y].classList == "true") {
+                bord[x][y].classList = "false";
             } else {
-                cel.classList = "true"
+                bord[x][y].classList = "true"
             }
         });
     }
 }
 
-const bord = [];
-document.querySelectorAll('tr').forEach((tableRow, index) => {
-    const cellenInRow = tableRow.querySelectorAll('td');
-    bord[index] = cellenInRow
-})
-console.log(bord);
-
 let simulation;
 function simulate () {
     let celstrue = [];
     let celsfalse = [];
-    for (let x = 0; x < 500; x = x + 1) {
-        for (let y = 0; y < 500; y = y + 1) {
+    for (let x = 0; x < size; x = x + 1) {
+        for (let y = 0; y < size; y = y + 1) {
             omringt = 0;
             let cel;
             if (x != 0) {
                 if (y != 0) {
-                    cel = bord[x-1][y-1]
-                    // cel = document.getElementById(`${x-1}, ${y-1}`);
+                    cel = bord[x-1][y-1];
                     omringt = checkcel(cel.classList, omringt);
                 }
-                cel = document.getElementById(`${x-1}, ${y}`);
+                cel = bord[x-1][y];
                 omringt = checkcel(cel.classList, omringt);
-                if (y != 199) {
-                    cel = document.getElementById(`${x-1}, ${y+1}`);
+                if (y != size - 1) {
+                    cel = bord[x-1][y+1];
                     omringt = checkcel(cel.classList, omringt);
                 }
             }
             if (y != 0) {
-                cel = document.getElementById(`${x}, ${y-1}`);
+                cel = bord[x][y-1];
                 omringt = checkcel(cel.classList, omringt);
             }
-            if (y != 199) {
-                cel = document.getElementById(`${x}, ${y+1}`);
+            if (y != size - 1) {
+                cel = bord[x][y+1];
                 omringt = checkcel(cel.classList, omringt);
             }
-            if (x != 199) {
+            if (x != size - 1) {
                 if (y != 0) {
-                    cel = document.getElementById(`${x+1}, ${y-1}`);
+                    cel = bord[x+1][y-1];
                     omringt = checkcel(cel.classList, omringt);
                 }
-                cel = document.getElementById(`${x+1}, ${y}`);
+                cel = bord[x+1][y];
                 omringt = checkcel(cel.classList, omringt);
-                if (y != 199) {
-                    cel = document.getElementById(`${x+1}, ${y+1}`);
+                if (y != size - 1) {
+                    cel = bord[x+1][y+1];
                     omringt = checkcel(cel.classList, omringt);
                 }
             }
@@ -94,6 +94,6 @@ function simulatebutton()
     if(simulation == true) {
         clearInterval(simulation);
     } else {
-        simulation = setInterval(simulate, 10);
+        simulation = setInterval(simulate, 0);
     }
 }

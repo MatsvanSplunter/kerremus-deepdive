@@ -1,3 +1,6 @@
+<?php
+$size = 100;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,11 +31,11 @@
     <button onclick="simulatebutton()">Simulate</button>
     <table>
         <?php
-        for ($row = 0; $row < 200; $row++) {
+        for ($row = 0; $row < $size; $row++) {
             ?>
             <tr>
                 <?php
-                for ($col = 0; $col < 200; $col++) {
+                for ($col = 0; $col < $size; $col++) {
                     ?>
                     <td class="false" id="<?=$row?>, <?=$col?>"><?=$row?>, <?=$col?></td>
                     <?php
