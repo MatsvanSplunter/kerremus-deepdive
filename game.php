@@ -1,5 +1,5 @@
 <?php
-$size = 50;
+$size = 100;
 $celsize = 25;
 ?>
 <!DOCTYPE html>

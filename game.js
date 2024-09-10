@@ -175,7 +175,7 @@ let speedslider = document.getElementById("speed");
 let sizeslider = document.getElementById("size");
 let cels = document.querySelectorAll("td");
 
-speedslider.addEventListener("mouseup", (e) => {
+speedslider.addEventListener("mousemove", (e) => {
     speed = (speedslider.value - 100) * -1;
     if(simbutton.innerHTML == "Pause") {
         clearInterval(simulation);
@@ -183,7 +183,7 @@ speedslider.addEventListener("mouseup", (e) => {
     }
 });
 
-sizeslider.addEventListener("mouseup", (e) => {
+sizeslider.addEventListener("mousemove", (e) => {
     cels.forEach((cel) => {
         cel.style.width = `${sizeslider.value}px`;
         cel.style.height = `${sizeslider.value}px`;
