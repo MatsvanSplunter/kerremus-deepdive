@@ -10,6 +10,14 @@ for (let x = 0; x < 100; x = x + 1) {
         });
     }
 }
+
+const bord = [];
+document.querySelectorAll('tr').forEach((tableRow, index) => {
+    const cellenInRow = tableRow.querySelectorAll('td');
+    bord[index] = cellenInRow
+})
+console.log(bord);
+
 let simulation;
 function simulate () {
     let celstrue = [];
@@ -20,7 +28,8 @@ function simulate () {
             let cel;
             if (x != 0) {
                 if (y != 0) {
-                    cel = document.getElementById(`${x-1}, ${y-1}`);
+                    cel = bord[x-1][y-1]
+                    // cel = document.getElementById(`${x-1}, ${y-1}`);
                     omringt = checkcel(cel.classList, omringt);
                 }
                 cel = document.getElementById(`${x-1}, ${y}`);
