@@ -13,7 +13,9 @@ CREATE TABLE user(
 CREATE TABLE gamesaves(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     bort TEXT NOT NULL,
+    gamesize INT NOT NULL,
     userid INT NOT NULL
+);
 
 INSERT INTO user(
     `username`,
