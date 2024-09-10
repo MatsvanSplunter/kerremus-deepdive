@@ -22,13 +22,12 @@ if ($_GET["login_register"] == 'login') {
                     echo "fill in your password";
                 } else {
                     $password = $_POST['password'];
-                    $stmt = $pdo->prepare('SELECT * FROM users WHERE gebruikersnaam = :gebruikersnaam');
-                    $stmt->execute([':gebruikersnaam' => $_POST['gebruikersnaam']]);
+                    $stmt = $pdo->prepare('SELECT * FROM user WHERE username = :username');
+                    $stmt->execute([':username' => $_POST['username']]);
                     $row = $stmt->fetch(PDO::FETCH_ASSOC);
                     if ($row !== false) {
                         var_dump($row);
                         if (password_verify($password, $row['password'])) {
-                            $_SESSION['admintoegang'] = $row['admintoegang'];
                             $_SESSION['account'] = $_POST['gebruikersnaam'];
                             header("Location: index.php");
                             exit;
@@ -128,13 +127,12 @@ if ($_GET["login_register"] == 'login') {
                     if ($_POST['password'] == $_POST['verifypassword']) {
                         $password = $_POST['password'];
                         $hashpassword = password_hash($password, PASSWORD_DEFAULT);
-                        $sql = "INSERT INTO users (gebruikersnaam, password, admintoegang)
-                        VALUES (:gebruikersnaam, :password, :admintoegang)";
+                        $sql = "INSERT INTO user (username, password)
+                        VALUES (:username, :password)";
                         $stmt = $pdo->prepare($sql);
                         $stmt->execute([
-                            ":gebruikersnaam" => $_POST['gebruikersnaam'],
+                            ":username" => $_POST['gebruikersnaam'],
                             ":password" => $hashpassword,
-                            ":admintoegang" => "NO"
                         ]);
                         header('Location: login_register.php?login_register=login');
                         exit();
