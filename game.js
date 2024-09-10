@@ -6,6 +6,8 @@ let simbutton = document.querySelector("button");
 let ev;
 let firstcel;
 let lastcel;
+let speed;
+let celsize;
 
 const bord = [];
 document.querySelectorAll('tr').forEach((tableRow, index) => {
@@ -142,7 +144,7 @@ function checkcel(classList, omringt)
 function simulatebutton()
 {
     if(simbutton.innerHTML == "Simulate") {
-        simulation = setInterval(simulate, 0);
+        simulation = setInterval(simulate, speed * 2);
         DoSimulate = true;
         simbutton.innerHTML = "Pause";
     } else {
@@ -164,6 +166,26 @@ window.onkeydown = function(e) {
 document.addEventListener('contextmenu', event => {
     event.preventDefault();
 });
-document.addEventListener('mousedown', event => {
+let table = document.querySelector("table");
+table.addEventListener('mousedown', event => {
     event.preventDefault();
+});
+
+let speedslider = document.getElementById("speed");
+let sizeslider = document.getElementById("size");
+let cels = document.querySelectorAll("td");
+
+speedslider.addEventListener("mouseup", (e) => {
+    speed = (speedslider.value - 100) * -1;
+    if(simbutton.innerHTML == "Pause") {
+        clearInterval(simulation);
+        simulation = setInterval(simulate, speed * 2);
+    }
+});
+
+sizeslider.addEventListener("mouseup", (e) => {
+    cels.forEach((cel) => {
+        cel.style.width = `${sizeslider.value}px`;
+        cel.style.height = `${sizeslider.value}px`;
+    })
 });
