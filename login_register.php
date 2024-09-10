@@ -1,5 +1,7 @@
+<!-- login -->
 <?php
-if ($_GET["login/register"] == 'login') {
+error_reporting(0);
+if ($_GET["login_register"] == 'login') {
 
         include_once("connect.php");
         $dbhost = "localhost";
@@ -107,7 +109,7 @@ if ($_GET["login/register"] == 'login') {
         <?php
             } else {
             ?>
-        <!--  -->
+        <!-- register -->
 
         <?php
 
@@ -134,7 +136,7 @@ if ($_GET["login/register"] == 'login') {
                             ":password" => $hashpassword,
                             ":admintoegang" => "NO"
                         ]);
-                        header('Location: login.php');
+                        header('Location: login_register.php?login_register=login');
                         exit();
                     } else {
                         echo "password doesn't match";
@@ -159,30 +161,11 @@ if ($_GET["login/register"] == 'login') {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Document</title>
-            <style>
-                body {
-                    background-color: darkgray;
-                }
-
-                .register-forum {
-                    display: grid;
-                    justify-items: center;
-                    margin-top: 53mm;
-                }
-
-                .button {
-                    margin-top: 5mm;
-                    margin-right: 5px;
-                    padding: 10px 20px;
-                    background-color: #007bff;
-                    color: #fff;
-                    border: none;
-                    border-radius: 5px;
-                }
-            </style>
+            <link rel="stylesheet" href="login.css">
         </head>
 
         <body>
+            <div class="container">
             <div class="register-forum">
                 <form method="post">
                     <h1>username</h1>
@@ -195,6 +178,7 @@ if ($_GET["login/register"] == 'login') {
                         <input type="submit" class="button" value="register user" name="submit" id="submit">
                     </div>
                 </form>
+            </div>
             </div>
         </body>
 
