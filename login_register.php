@@ -134,7 +134,7 @@ if ($_GET["login/register"] == 'login') {
                             ":password" => $hashpassword,
                             ":admintoegang" => "NO"
                         ]);
-                        header('Location: login.php');
+                        header('Location: login_register.php?login_register=login');
                         exit();
                     } else {
                         echo "password doesn't match";
