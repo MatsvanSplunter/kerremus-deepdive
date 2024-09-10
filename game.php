@@ -1,5 +1,6 @@
 <?php
 $size = 50;
+$celsize = 25;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,20 +16,28 @@ $size = 50;
             background-color: grey;
         }
         td {
-            width: 25px;
-            height: 25px;
+            width: <?=$celsize?>px;
+            height: <?=$celsize?>px;
         }
         body {
             width: max-content;
         }
-        button {
+        button, input {
+            display: flex;
+            position: relative;
+        }
+        div {
             display: flex;
             position: absolute;
         }
     </style>
 </head>
 <body>
-    <button onclick="simulatebutton()">Simulate</button>
+    <div>
+        <button onclick="simulatebutton()">Simulate</button>
+        <input type="range" min="1" max="100" id="speed">
+        <input type="range" min="1" max="100" id="size" value="<?=$celsize?>">
+    </div>
     <table>
         <?php
         for ($row = 0; $row < $size; $row++) {

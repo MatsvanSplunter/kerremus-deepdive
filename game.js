@@ -6,6 +6,8 @@ let simbutton = document.querySelector("button");
 let ev;
 let firstcel;
 let lastcel;
+let speed;
+let celsize;
 
 const bord = [];
 document.querySelectorAll('tr').forEach((tableRow, index) => {
@@ -19,34 +21,47 @@ for (let x = 0; x < size; x += 1) {
         bord[x][y].addEventListener("mouseover", (e) => {
             addEventListener("mousedown", (e) => {
                 mousedown = true;
-                firstcel = x, y;
+                firstcel = [x, y, bord[x][y].classList];
             });
             addEventListener("mouseup", (e) => {
                 mousedown = false;
-                lastcel = x, y;
             });
-            if(mousedown && ev.button == 0) {
+            lastcel = [x, y];
+            let cel2 = [0, 0];
+            let cel1 = [0, 0];
+            if(firstcel != undefined && lastcel != undefined) {
+                if(firstcel[0] > lastcel[0]) {
+                    cel1[0] = lastcel[0];
+                    cel2[0] = firstcel[0];
+                } else {
+                    cel2[0] = lastcel[0];
+                    cel1[0] = firstcel[0];
+                }
+                if(firstcel[1] > lastcel[1]) {
+                    cel1[1] = lastcel[1];
+                    cel2[1] = firstcel[1];
+                } else {
+                    cel2[1] = lastcel[1];
+                    cel1[1] = firstcel[1];
+                }
+            }
+            if(mousedown && eb == 0) {
                 if(bord[x][y].classList == "true") {
                     bord[x][y].classList = "false";
                 } else {
                     bord[x][y].classList = "true";
                 }
-            } else if(mousedown && ev.button == 2) {
-                for(let celx = firstcel.x; celx >= lastcel.x; celx += 1) {
-                    for(let cely = firstcel.y; cely >= lastcel.y; cely += 1) {
-                        if(bord[celx][cely].classList == "true") {
-                            bord[celx][cely].classList = "false";
-                        } else {
-                            bord[celx][cely].classList = "true";
-                        }
-                        
+            } else if(mousedown && eb == 2) {
+                for(let celx = cel1[0]; celx <= cel2[0]; celx += 1) {
+                    for(let cely = cel1[1]; cely <= cel2[1]; cely += 1) {
+                        bord[celx][cely].classList = firstcel[2];
                     }
                 }
             }
         });
         bord[x][y].addEventListener("mousedown", (e) => {
-            ev = e;
-            if(ev.button == 0) {
+            eb = e.button;
+            if(e.button == 0 || e.button == 2) {
                 if(bord[x][y].classList == "true") {
                     bord[x][y].classList = "false";
                 } else {
@@ -129,7 +144,7 @@ function checkcel(classList, omringt)
 function simulatebutton()
 {
     if(simbutton.innerHTML == "Simulate") {
-        simulation = setInterval(simulate, 0);
+        simulation = setInterval(simulate, speed * 2);
         DoSimulate = true;
         simbutton.innerHTML = "Pause";
     } else {
@@ -151,6 +166,26 @@ window.onkeydown = function(e) {
 document.addEventListener('contextmenu', event => {
     event.preventDefault();
 });
-document.addEventListener('mousedown', event => {
+let table = document.querySelector("table");
+table.addEventListener('mousedown', event => {
     event.preventDefault();
+});
+
+let speedslider = document.getElementById("speed");
+let sizeslider = document.getElementById("size");
+let cels = document.querySelectorAll("td");
+
+speedslider.addEventListener("mouseup", (e) => {
+    speed = (speedslider.value - 100) * -1;
+    if(simbutton.innerHTML == "Pause") {
+        clearInterval(simulation);
+        simulation = setInterval(simulate, speed * 2);
+    }
+});
+
+sizeslider.addEventListener("mouseup", (e) => {
+    cels.forEach((cel) => {
+        cel.style.width = `${sizeslider.value}px`;
+        cel.style.height = `${sizeslider.value}px`;
+    })
 });
