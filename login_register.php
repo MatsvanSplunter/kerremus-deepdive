@@ -1,3 +1,4 @@
+<!-- login -->
 <?php
 error_reporting(0);
 if ($_GET["login_register"] == 'login') {
@@ -108,7 +109,7 @@ if ($_GET["login_register"] == 'login') {
         <?php
             } else {
             ?>
-        <!--  -->
+        <!-- register -->
 
         <?php
 
