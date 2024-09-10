@@ -8,22 +8,22 @@ body {
     overflow: hidden;
 }
 
-/* Dit is waar de carrousel plaatsvindt */
+/* Background carousel */
 body::before {
     content: "";
-    position: absolute;
+    position: fixed; /* Fix the background so it doesn't move */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-size: cover;
     background-position: center;
-    opacity: 0.6;
-    animation: carousel 12s infinite; /* De carrousel-animatie */
-    z-index: -1; /* Zorg ervoor dat de achtergrond achter de inhoud blijft */
+    opacity: 0.4;
+    animation: carousel 12s infinite; /* Carousel animation */
+    z-index: -1; /* Make sure background stays behind content */
 }
 
-/* De keyframes animatie om tussen afbeeldingen te wisselen */
+/* Keyframes for the carousel */
 @keyframes carousel {
     0% {
         background-image: url('image1.jpg');
@@ -32,23 +32,23 @@ body::before {
         background-image: url('image2.jpg');
     }
     66% {
-        background-image: url('image2.jpg');
+        background-image: url('image3.jpeg');
     }
     100% {
         background-image: url('image1.jpg');
     }
 }
 
+/* Styling for the title */
 .title {
     color: white;
     display: flex;
     justify-content: center;
-    z-index: 0;
+    align-items: center;
     position: relative;
-}
-
-img[alt="first"] {
-    width: 100%;
+    z-index: 1; /* Ensure title stays above the background */
     height: 100vh;
-    overflow: none;
+    font-size: 2.5rem; /* Example font size */
+    text-align: center;
+    flex-direction: column; 
 }
