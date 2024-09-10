@@ -14,8 +14,8 @@ let simulation;
 function simulate () {
     let celstrue = [];
     let celsfalse = [];
-    for (let x = 0; x < 500; x = x + 1) {
-        for (let y = 0; y < 500; y = y + 1) {
+    for (let x = 0; x < size; x = x + 1) {
+        for (let y = 0; y < size; y = y + 1) {
             omringt = 0;
             let cel;
             if (x != 0) {
@@ -25,7 +25,7 @@ function simulate () {
                 }
                 cel = document.getElementById(`${x-1}, ${y}`);
                 omringt = checkcel(cel.classList, omringt);
-                if (y != 199) {
+                if (y != size - 1) {
                     cel = document.getElementById(`${x-1}, ${y+1}`);
                     omringt = checkcel(cel.classList, omringt);
                 }
@@ -34,18 +34,18 @@ function simulate () {
                 cel = document.getElementById(`${x}, ${y-1}`);
                 omringt = checkcel(cel.classList, omringt);
             }
-            if (y != 199) {
+            if (y != size - 1) {
                 cel = document.getElementById(`${x}, ${y+1}`);
                 omringt = checkcel(cel.classList, omringt);
             }
-            if (x != 199) {
+            if (x != size - 1) {
                 if (y != 0) {
                     cel = document.getElementById(`${x+1}, ${y-1}`);
                     omringt = checkcel(cel.classList, omringt);
                 }
                 cel = document.getElementById(`${x+1}, ${y}`);
                 omringt = checkcel(cel.classList, omringt);
-                if (y != 199) {
+                if (y != size - 1) {
                     cel = document.getElementById(`${x+1}, ${y+1}`);
                     omringt = checkcel(cel.classList, omringt);
                 }
@@ -85,6 +85,6 @@ function simulatebutton()
     if(simulation == true) {
         clearInterval(simulation);
     } else {
-        simulation = setInterval(simulate, 10);
+        simulation = setInterval(simulate, 1);
     }
 }
