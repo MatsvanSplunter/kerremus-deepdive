@@ -1,5 +1,5 @@
 <?php
-$width = 100;
+$width = 75;
 $height = 50;
 $celsize = 25;
 ?>
