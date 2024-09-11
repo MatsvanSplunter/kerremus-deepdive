@@ -161,6 +161,15 @@ document.body.onkeydown = function(e) {
     if (e.key == " ") {
         simulatebutton();
     }
+    if (e.key = "Shift") {
+        Shiftkeydown = false;
+    }
+}
+
+document.body.onkeyup = function(e) {
+    if (e.key = "Shift") {
+        Shiftkeydown = true;
+    }
 }
 
 window.onkeydown = function(e) {
