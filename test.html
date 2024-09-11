@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game of Life (Infinite Grid)</title>
+  <style>
+    canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="gameCanvas" width="800" height="800"></canvas>
+<button onclick="togglePlay()">Play/Pause</button>
+<script>
+  const canvas = document.getElementById('gameCanvas');
+  const ctx = canvas.getContext('2d');
+  const CELL_SIZE = 10;
+  const cols = Math.floor(canvas.width / CELL_SIZE);
+  const rows = Math.floor(canvas.height / CELL_SIZE);
+  const liveCells = new Set();
+  let playing = false;
+  
+  // Helper function to convert [x, y] to a unique string key
+  function coordToStr(x, y) {
+    return `${x},${y}`;
+  }
+
+  // Helper function to convert a string key back to coordinates
+  function strToCoord(str) {
+    return str.split(',').map(Number);
+  }
+
+  // Toggle live/dead state for a cell
+  canvas.addEventListener('click', (e) => {
+    const x = Math.floor(e.offsetX / CELL_SIZE);
+    const y = Math.floor(e.offsetY / CELL_SIZE);
+    const key = coordToStr(x, y);
+    
+    if (liveCells.has(key)) {
+      liveCells.delete(key); // Kill cell
+    } else {
+      liveCells.add(key); // Make cell alive
+    }
+    draw();
+  });
+
+  // Draw the grid and live cells
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = '#ddd';
+    
+    // Draw grid
+    for (let i = 0; i <= cols; i++) {
+      ctx.beginPath();
+      ctx.moveTo(i * CELL_SIZE, 0);
+      ctx.lineTo(i * CELL_SIZE, canvas.height);
+      ctx.stroke();
+    }
+    
+    for (let i = 0; i <= rows; i++) {
+      ctx.beginPath();
+      ctx.moveTo(0, i * CELL_SIZE);
+      ctx.lineTo(canvas.width, i * CELL_SIZE);
+      ctx.stroke();
+    }
+
+    // Draw live cells
+    liveCells.forEach(cell => {
+      const [x, y] = strToCoord(cell);
+      ctx.fillStyle = 'black';
+      ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+    });
+  }
+
+  // Get the neighbors of a cell
+  function getNeighbors(x, y) {
+    const neighbors = [];
+    for (let dx = -1; dx <= 1; dx++) {
+      for (let dy = -1; dy <= 1; dy++) {
+        if (dx !== 0 || dy !== 0) {
+          neighbors.push([x + dx, y + dy]);
+        }
+      }
+    }
+    return neighbors;
+  }
+
+  // Run one iteration of the Game of Life rules
+  function nextGeneration() {
+    const newLiveCells = new Set();
+    const neighborCounts = {};
+
+    // Count neighbors for each live cell and its neighbors
+    liveCells.forEach(cell => {
+      const [x, y] = strToCoord(cell);
+      getNeighbors(x, y).forEach(([nx, ny]) => {
+        const key = coordToStr(nx, ny);
+        neighborCounts[key] = (neighborCounts[key] || 0) + 1;
+      });
+    });
+
+    // Apply rules: alive with 2-3 neighbors or dead with exactly 3 neighbors
+    Object.keys(neighborCounts).forEach(key => {
+      const count = neighborCounts[key];
+      if (count === 3 || (count === 2 && liveCells.has(key))) {
+        newLiveCells.add(key);
+      }
+    });
+
+    liveCells.clear();
+    newLiveCells.forEach(cell => liveCells.add(cell));
+    draw();
+  }
+
+  // Game loop
+  let interval = null;
+  function togglePlay() {
+    if (playing) {
+      clearInterval(interval);
+    } else {
+      interval = setInterval(nextGeneration, 200);
+    }
+    playing = !playing;
+  }
+
+  draw();
+</script>
+
+</body>
+</html>
