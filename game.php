@@ -79,8 +79,6 @@ $celsize = 25;
         bord[index] = Array.from(cellenInRow);
     });
 
-    console.log(bord);
-
     addEventListener("mouseup", (e) => {
         mousedown = false;
         firstcel = undefined;
@@ -149,52 +147,46 @@ $celsize = 25;
     });
 
     function simulate() {
-        let celstrue = [];
-        let celsfalse = [];
+        let celchange = [];
 
-        for (let x = 0; x < width; x++) {
-            for (let y = 0; y < height; y++) {
+        for (let x = 0; x < bord.length; x += 1) {
+            for (let y = 0; y < bord[0].length; y += 1) {
                 let omringt = countNeighbors(x, y);
                 let cel = bord[x][y];
-
-                if (cel.classList.contains("false")) {
+                console.log(omringt);
+                if (cel.classList == "false") {
                     if (omringt == 3) {
-                        celstrue.push(cel);
+                        celchange.push(cel);
                     }
                 } else {
                     if (omringt != 2 && omringt != 3) {
-                        celsfalse.push(cel);
+                        celchange.push(cel);
                     }
                 }
             }
         }
-
-        requestAnimationFrame(() => {
-            celstrue.forEach(cel => {
-                cel.classList.replace("false", "true");
-            });
-            celsfalse.forEach(cel => {
-                cel.classList.replace("true", "false");
-            });
+        celchange.forEach(cel => {
+            toggleCellState(cel);
         });
     }
 
     function countNeighbors(x, y) {
-        let omringt = 0;
-        for (let dx = -1; dx <= 1; dx++) {
-            for (let dy = -1; dy <= 1; dy++) {
-                if (dx === 0 && dy === 0) continue;
+    let omringt = 0;
+    for (let dx = -1; dx <= 1; dx += 1) {
+        for (let dy = -1; dy <= 1; dy += 1) {
+            if (dx !== 0 && dy !== 0) {
                 let nx = x + dx;
                 let ny = y + dy;
-                if (nx >= 0 && ny >= 0 && nx < width && ny < height) {
-                    if (bord[nx][ny].classList.contains("true")) {
-                        omringt++;
+                if (nx >= 0 && ny >= 0 && nx < bord.length && ny < bord[0].length) {
+                    if (bord[nx][ny].classList == "true") {
+                        omringt += 1;
                     }
                 }
             }
         }
-        return omringt;
     }
+    return omringt;
+}
 
     function checkcel(classList, omringt) {
         if (classList == "true") {
@@ -215,17 +207,11 @@ $celsize = 25;
         if (simbutton.innerHTML === "Simulate") {
             DoSimulate = true;
             simbutton.innerHTML = "Pause";
-            runSimulation();
+            simulation = setInterval(simulate, speed * 2);
         } else {
             DoSimulate = false;
             simbutton.innerHTML = "Simulate";
-        }
-    }
-
-    function runSimulation() {
-        if (DoSimulate) {
-            simulate();
-            requestAnimationFrame(runSimulation);
+            clearInterval(simulation);
         }
     }
 
