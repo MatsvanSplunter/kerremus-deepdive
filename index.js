@@ -1,3 +1,11 @@
+document.getElementById('login').addEventListener('click', function() {
+  window.location.href = 'login_register.php';    
+  });
+
+  document.getElementById('logout').addEventListener('click', function() {
+    window.location.href = 'logout.php';    
+    });
+
 document.getElementById('newGameBtn').addEventListener('click', function() {
     document.getElementById('mainMenu').style.display = 'none';
     document.getElementById('newGameMenu').style.display = 'flex';
@@ -25,8 +33,3 @@ document.getElementById('newGameBtn').addEventListener('click', function() {
     document.getElementById('name').style.display = 'block';
     document.getElementById('name3').style.display = 'none';
   });
-
-  document.getElementById('login').addEventListener('click', function() {
-    window.location.href = 'login_register.php';    
-    });
-  
