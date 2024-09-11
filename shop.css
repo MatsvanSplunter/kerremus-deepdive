@@ -1,0 +1,122 @@
+body {
+    padding: 0;
+    margin: 0;
+    background-color: black;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Background carousel */
+body::before {
+    content: "";
+    position: fixed; /* Fix the background so it doesn't move */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.2;
+    animation: carousel 12s infinite; /* Carousel animation */
+    z-index: -1; /* Make sure background stays behind content */
+}
+
+/* Keyframes for the carousel */
+@keyframes carousel {
+    0% {
+        background-image: url('image1.jpg');
+    }
+    33% {
+        background-image: url('image2.jpg');
+    }
+    66% {
+        background-image: url('image3.jpeg');
+    }
+    100% {
+        background-image: url('image1.jpg');
+    }
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  .neon-btn {
+    padding: 10px 20px;
+    background: transparent;
+    border: 3px solid #f3eaff;
+    border-radius: 50px;
+    margin-top: 3vh;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 32px;
+    text-decoration: none;
+    color: #fff;
+    width: 15vw;
+    text-shadow: 0 0 5px #da8fff, 0 0 10px #da8fff, 0 0 20px #da8fff, 0 0 30px #da8fff, 0 0 40px #da8fff, 0 0 55px #da8fff, 0 0 75px #da8fff;
+    transition: all .4s ease-out;
+    box-shadow: 0 0 7px 0 #70078e, 0 0 5px 2px #70078e, inset 0 0 7px 0 #70078e, inset 0 0 5px 1px #70078e;
+  }
+
+  @keyframes zoomOutFlash {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+
+  .title {
+    font-family: Arial, sans-serif;
+    font-size: 3rem;
+    color: #ffffff;
+    text-shadow: 0 0 5px #da8fff, 0 0 10px #da8fff, 0 0 20px #da8fff, 0 0 30px #da8fff, 0 0 40px #da8fff, 0 0 55px #da8fff, 0 0 75px #da8fff;
+    animation: zoomInFlash 2.5s backwards;
+    display: flex;
+    text-align: center;
+    width: 100%;
+    justify-content: center;
+  }
+
+  h1, p {
+    font-family: Arial, sans-serif;
+    font-size: 3rem;
+    color: #ffffff;
+    text-shadow: 0 0 5px #da8fff, 0 0 10px #da8fff, 0 0 20px #da8fff, 0 0 30px #da8fff, 0 0 40px #da8fff, 0 0 55px #da8fff, 0 0 75px #da8fff;
+    animation: zoomInFlash 2.5s backwards;
+  }
+
+  .cardrowcolors{
+    gap: 20px;
+    margin-left: 1%;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .cards {
+    width: 30vw;
+    height: 40vh;
+    border: 3px solid #f3eaff;
+    box-shadow: 0 0 7px 0 #70078e, 0 0 5px 2px #70078e, inset 0 0 7px 0 #70078e, inset 0 0 5px 1px #70078e;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 8px;
+}
+
+img {
+    width: 44px;
+    height: 44px;
+}
