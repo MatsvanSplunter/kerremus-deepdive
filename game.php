@@ -1,7 +1,7 @@
 <?php
 
-$width = 100;
-$height = 50;
+$width = 0;
+$height = 0;
 if($_POST['gridsize']) {
     switch ($_POST['gridsize']) {
         case 'small':
