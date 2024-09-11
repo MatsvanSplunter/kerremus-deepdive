@@ -16,7 +16,7 @@ if($_POST) {
             $width = 1000;
             $height = 500;
             break;
-        case 'large':
+        case 'back':
             header("location: index.php");
             break;
         default:
