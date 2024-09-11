@@ -12,6 +12,21 @@ include_once("connect.php");
   session_start();
   error_reporting(0);
 
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if(isset($_POST['small'])){
+      $_SESSION['width'] = $width = 100;
+      $_SESSION['height'] = $height = 100;
+    }
+    if(isset($_POST['medium'])){
+      $_SESSION['width'] = $width = 500;
+      $_SESSION['height'] = $height = 500;
+    }
+    if(isset($_POST['large'])){
+      $_SESSION['width'] = $width = 1000;
+      $_SESSION['height'] = $height = 1000;
+    }
+  }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,16 +47,18 @@ include_once("connect.php");
       <button class="neon-btn" id="newGameBtn">new game</button>
       <button class="neon-btn" id="loadGameBtn">load game</button>
     <?php } ?>
-    <button class="neon-btn" id="login" <?php if ($_SESSION['userid'] != null) { echo 'style="display:none;"'; } ?>>Login</button>
+    <button class="neon-btn" id="login" <?php if ($_SESSION['userid'] != null) { echo 'style="display:none;"'; } ?>>Login/register</button>
     <button class="neon-btn" id="logout" <?php if ($_SESSION['userid'] == null) { echo 'style="display:none;"'; } ?>>logout</button>
   </div>
 
   <h1 id="name2" style="display:none;">choose grid size</h1>
   <div class="buttons-container" id="newGameMenu" style="display:none;">
-    <button class="neon-btn" id="backBtn">Back</button>
-    <button class="neon-btn">small</button>
-    <button class="neon-btn">medium</button>
-    <button class="neon-btn">large</button>
+    <form method="post" class="buttons-container">    
+      <button class="neon-btn" id="backBtn">Back</button>
+      <button class="neon-btn" id="small">small</button>
+      <button class="neon-btn" id="medium">medium</button>
+      <button class="neon-btn" id="large">large</button>
+    </form>
   </div>
 
   <h1 id="name3" style="display:none;">load game</h1>
