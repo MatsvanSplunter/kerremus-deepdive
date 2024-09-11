@@ -12,21 +12,6 @@ include_once("connect.php");
   session_start();
   error_reporting(0);
 
-  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if(isset($_POST['small'])){
-      $_SESSION['width'] = $width = 100;
-      $_SESSION['height'] = $height = 100;
-    }
-    if(isset($_POST['medium'])){
-      $_SESSION['width'] = $width = 500;
-      $_SESSION['height'] = $height = 500;
-    }
-    if(isset($_POST['large'])){
-      $_SESSION['width'] = $width = 1000;
-      $_SESSION['height'] = $height = 1000;
-    }
-  }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
