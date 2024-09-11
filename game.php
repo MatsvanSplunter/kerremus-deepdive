@@ -2,9 +2,8 @@
 
 $width = 100;
 $height = 50;
-var_dump($_POST);
-if($_GET['size']) {
-    switch ($_GET['size']) {
+if($_POST['gridsize']) {
+    switch ($_POST['gridsize']) {
         case 'small':
             $width = 100;
             $height = 50;
@@ -16,6 +15,9 @@ if($_GET['size']) {
         case 'large':
             $width = 1000;
             $height = 500;
+            break;
+        case 'back':
+            header("location: index.php");
             break;
         default:
             break;
