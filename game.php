@@ -2,7 +2,7 @@
 
 $width = 0;
 $height = 0;
-if($_POST['gridsize']) {
+if ($_POST['gridsize']) {
     switch ($_POST['gridsize']) {
         case 'small':
             $width = 100;
@@ -55,8 +55,8 @@ $celsize = 25;
             }
             tableHTML += "</tr>";
         }
-        table.innerHTML = tableHTML;
         document.body.appendChild(table);
+        table.innerHTML = tableHTML;
 
         document.documentElement.style.setProperty('--cell-size', '25px');
     </script>
@@ -86,13 +86,13 @@ $celsize = 25;
         firstcel = undefined;
         console.debug("mouseup");
     });
-    addEventListener("mousedown", (e) => { 
+    addEventListener("mousedown", (e) => {
         mousedown = true;
         eb = e.button;
         if (e.target.tagName === "TD") {
             let cell = e.target;
             let [x, y] = cell.id.split(",").map(Number);
-            if(e.button == 0 || e.button == 2) {
+            if (e.button == 0 || e.button == 2) {
                 toggleCellState(cell);
             }
             console.debug("mousedown");
@@ -108,7 +108,7 @@ $celsize = 25;
 
     document.querySelector("table").addEventListener("mouseover", (event) => {
         if (event.target.tagName === "TD") {
-            if(firstcel) {
+            if (firstcel) {
                 let cell = event.target;
                 let [x, y] = cell.id.split(",").map(Number);
                 lastcel = [x, y];
@@ -204,7 +204,7 @@ $celsize = 25;
     }
 
     function toggleCellState(cell) {
-        if(cell.classList == "true") {
+        if (cell.classList == "true") {
             cell.classList = "false";
         } else {
             cell.classList = "true";
@@ -258,7 +258,7 @@ $celsize = 25;
         }
     });
 
-    sizeslider.addEventListener("mousemove", () => {
+    sizeslider.addEventListener("change", () => {
         document.documentElement.style.setProperty('--cell-size', sizeslider.value + 'px');
     });
 </script>
