@@ -1,12 +1,10 @@
 .true {
     background-color: rgb(0, 141, 143);
     box-shadow: 0 0 20px rgb(0, 141, 143), 0 0 30px rgb(0, 251, 255), inset 0 0 7px rgb(0, 251, 255);
-    text-shadow: 0 0 5px rgb(0, 141, 143), 0 0 10px rgb(0, 141, 143), 0 0 20px rgb(0, 141, 143), 0 0 30px rgb(0, 141, 143), 0 0 40px rgb(0, 141, 143), 0 0 55px #da8fff, 0 0 75px #da8fff;
 }
+
 .false {
     background-color: grey;
-    text-shadow: 0 0 5px #da8fff, 0 0 10px #da8fff, 0 0 20px #da8fff, 0 0 30px #da8fff, 0 0 40px #da8fff, 0 0 55px #da8fff, 0 0 75px #da8fff;
-
 }
 
 td {
