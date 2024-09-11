@@ -43,6 +43,8 @@ include_once("connect.php");
       <button class="neon-btn" name="gridsize" value="small" id="small">small</button>
       <button class="neon-btn" name="gridsize" value="medium" id="medium">medium</button>
       <button class="neon-btn" name="gridsize" value="large" id="large">large</button>
+      <button class="neon-btn" name="gridsize" value="XL" id="XL">XL</button>
+      <button class="neon-btn" name="gridsize" value="XXL" id="XXL">XXL</button>
     </form>
   </div>
 

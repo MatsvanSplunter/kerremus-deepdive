@@ -16,6 +16,14 @@ if ($_POST['gridsize']) {
             $width = 1000;
             $height = 500;
             break;
+        case 'XL':
+            $width = 1500;
+            $height = 750;
+            break;
+        case 'XXL':
+            $width = 2000;
+            $height = 1000;
+            break;
         case 'back':
             header("location: index.php");
             break;
