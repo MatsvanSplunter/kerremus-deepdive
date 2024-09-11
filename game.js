@@ -25,6 +25,8 @@ addEventListener("mouseup", (e) => {
 addEventListener("mousedown", (e) => {
     mousedown = true;
     eb = e.button;
+    points += 1;
+    pointtext.innerHTML = points;
     if (e.target.tagName === "TD") {
         let cell = e.target;
         let [x, y] = cell.id.split(",").map(Number);
@@ -40,8 +42,6 @@ addEventListener("mousedown", (e) => {
             firstcel = [x, y, bord[x][y].classList];
         }
     }
-    points += 1;
-    pointtext.innerHTML = points;
 });
 
 document.querySelector("table").addEventListener("mouseover", (event) => {
@@ -80,6 +80,8 @@ document.querySelector("table").addEventListener("mouseover", (event) => {
                 }
             }
             if (mousedown && eb == 0) {
+                points += 1;
+                pointtext.innerHTML = points;
                 toggleCellState(bord[x][y]);
             }
         }
