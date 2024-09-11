@@ -70,6 +70,9 @@ $celsize = 25;
 
         document.documentElement.style.setProperty('--cell-size', '25px');
     </script>
+    <div class="bottom-bar">
+        <h3>no patterns saved</h3>
+    </div>
 </body>
 <script src="game.js"></script>
 

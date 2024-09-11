@@ -41,6 +41,23 @@ button, input {
     margin: 0px;
 }
 
+.bottom-bar {
+    display: flex;
+    position: sticky;
+    bottom: 0px;
+    left: 0px;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: auto;
+    height: 20px;
+    margin: 0px;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottom-bar:hover {
+    height: 200px;
+}
+
 .grid {
     display: -webkit-flex;
     display: flex;
