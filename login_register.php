@@ -175,6 +175,7 @@ if ($_GET["login_register"] == 'login') {
                     <div>
                         <input type="submit" class="button" value="register user" name="submit" id="submit">
                     </div>
+                    <a href="login_register.php?login_register=login">already have an account click here!</a>
                 </form>
             </div>
             </div>

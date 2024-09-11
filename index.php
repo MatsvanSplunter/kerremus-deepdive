@@ -27,18 +27,34 @@ include_once("connect.php");
 <body>
 <div class="title">
 <div class="zoom-flash">
-  <h1>Game of Live</h1>
-  <div class="buttons-container">
-    <?php 
-    
-    if ($_SESSION['userid'] != null) {
-      
-    ?>
-      <button class="neon-btn">new game</button>
-      <button class="neon-btn">load game</button>
+  <h1 id="name">kerremus of live</h1>
+  <div class="buttons-container" id="mainMenu">
+    <?php if ($_SESSION['userid'] != null) { ?>
+      <button class="neon-btn" id="newGameBtn">new game</button>
+      <button class="neon-btn" id="loadGameBtn">load game</button>
     <?php } ?>
-    <button class="neon-btn">login</button>
+    <button class="neon-btn" id="login">login</button>
+  </div>
+
+  <h1 id="name2" style="display:none;">choose grid size</h1>
+  <div class="buttons-container" id="newGameMenu" style="display:none;">
+    <button class="neon-btn" id="backBtn">Back</button>
+    <button class="neon-btn">small</button>
+    <button class="neon-btn">medium</button>
+    <button class="neon-btn">large</button>
+  </div>
+
+  <h1 id="name3" style="display:none;">load game</h1>
+  <div class="buttons-container" id="loadGameMenu" style="display:none;">
+    <button class="neon-btn" id="backBtn2">Back</button>
+    <button class="neon-btn">save 1</button>
+    <button class="neon-btn">save 2</button>
+    <button class="neon-btn">save 3</button>
+  </div>
 </div>
+
+</div>
+<script src="index.js"></script>
 </body>
 
 </html>
