@@ -47,6 +47,7 @@ $celsize = 25;
 <body>
     <div class="top-bar">
         <button onclick="simulatebutton()">Simulate</button>
+        <button onclick="simulate()">Step</button>
         <input type="range" min="1" max="100" id="speed">
         <input type="range" min="1" max="100" id="size" value="<?= $celsize ?>">
     </div>
@@ -161,8 +162,8 @@ $celsize = 25;
             for (let y = 0; y < bord[0].length; y += 1) {
                 let omringt = countNeighbors(x, y);
                 let cel = bord[x][y];
-                console.log(omringt);
                 if (cel.classList == "false") {
+                    console.log(omringt);
                     if (omringt == 3) {
                         celchange.push(cel);
                     }
@@ -182,7 +183,7 @@ $celsize = 25;
     let omringt = 0;
     for (let dx = -1; dx <= 1; dx += 1) {
         for (let dy = -1; dy <= 1; dy += 1) {
-            if (dx !== 0 && dy !== 0) {
+            if (dx != 0 || dy != 0) {
                 let nx = x + dx;
                 let ny = y + dy;
                 if (nx >= 0 && ny >= 0 && nx < bord.length && ny < bord[0].length) {
