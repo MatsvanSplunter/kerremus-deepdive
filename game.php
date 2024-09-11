@@ -106,6 +106,8 @@ $celsize = 25;
     document.querySelector("table").addEventListener("mouseover", (event) => {
         if (event.target.tagName === "TD") {
             if(firstcel) {
+                let cell = event.target;
+                let [x, y] = cell.id.split(",").map(Number);
                 lastcel = [x, y];
                 let cel2 = [0, 0];
                 let cel1 = [0, 0];
@@ -127,8 +129,12 @@ $celsize = 25;
                 }
                 if (mousedown && eb == 2) {
                     for (let celx = cel1[0]; celx <= cel2[0]; celx += 1) {
-                        for (let cely = cel1.classList; cely <= cel2.classList; cely += 1) {
-                            bord[celx][cely].classList = firstcel[2];
+                        for (let cely = cel1[1]; cely <= cel2[1]; cely += 1) {
+                            if (firstcel[2] == "false") {
+                                bord[celx][cely].classList = "false";
+                            } else {
+                                bord[celx][cely].classList = "true";
+                            }
                         }
                     }
                 }
