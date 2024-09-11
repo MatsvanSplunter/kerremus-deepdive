@@ -47,48 +47,12 @@ if ($_GET["login_register"] == 'login') {
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="css/loginregister.css">
             <title>login</title>
-            <style>
-                body {
-                    background-color: darkgray
-                }
-
-                .login-forum {
-                    display: grid;
-                    justify-items: center;
-                    margin-top: 53mm;
-                }
-
-                .button {
-                    margin-top: 5mm;
-                    margin-right: 5px;
-                    padding: 10px 20px;
-                    background-color: #007bff;
-                    color: #fff;
-                    border: none;
-                    border-radius: 5px;
-                }
-
-                .button:hover {
-                    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-                }
-
-                .knop {
-                    display: inline-block;
-                    padding: 8px 16px;
-                    background-color: #007bff;
-                    color: #fff;
-                    font-size: 16px;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    text-decoration: none;
-                    transition: background-color 0.3s;
-                }
-            </style>
         </head>
 
         <body>
+        <div class="container">
             <div class="login-forum">
                 <form method="POST">
                     <h1>username</h1>
@@ -97,10 +61,11 @@ if ($_GET["login_register"] == 'login') {
                     <input type="password" name="password" id="password">
                     <div class="button-container">
                         <input type="submit" class="button" value="login" id="login">
-                        <a href="register.php" class="knop">register</a>
                     </div>
+                    <a href="register.php" class="knop"> don't have an account click here!</a>
                 </form>
             </div>
+        </div>
         </body>
 
         </html>
@@ -158,7 +123,7 @@ if ($_GET["login_register"] == 'login') {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Document</title>
-            <link rel="stylesheet" href="login.css">
+            <link rel="stylesheet" href="loginregister.css">
         </head>
 
         <body>
