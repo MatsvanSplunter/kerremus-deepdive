@@ -46,11 +46,11 @@ $celsize = 25;
 
 <body>
     <div class="top-bar">
-        <a href="index.php"><button>Back</button></a>
         <button onclick="simulatebutton()">Simulate</button>
         <button onclick="simulate()">Step</button>
         <input type="range" min="1" max="100" id="speed">
         <input type="range" min="1" max="100" id="size" value="<?= $celsize ?>">
+        <a href="index.php"><button>Back</button></a>
     </div>
     <script>
         const width = <?= $width ?>;
