@@ -1,15 +1,16 @@
-.true {
+td.true {
     background-color: rgb(0, 141, 143);
     box-shadow: 0 0 20px rgb(0, 141, 143), 0 0 30px rgb(0, 251, 255), inset 0 0 7px rgb(0, 251, 255);
 }
 
-.false {
+td.false {
     background-color: grey;
 }
 
 td {
-    min-width: 25px;
-    height: 25px;
+    min-width: var(--cell-size);
+    height: var(--cell-size);
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
 }
 
 body {
