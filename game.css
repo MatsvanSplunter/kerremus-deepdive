@@ -1,6 +1,11 @@
-td.true {
+/*td.true {
     background-color: rgb(0, 141, 143);
     box-shadow: 0 0 20px rgb(0, 141, 143), 0 0 30px rgb(0, 251, 255), inset 0 0 7px rgb(0, 251, 255);
+}*/
+
+td.true {
+    background-color: cyan;
+    box-shadow: 0 0 20px cyan, 0 0 30px cyan, inset 0 0 7px cyan;
 }
 
 td.false {
