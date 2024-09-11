@@ -3,6 +3,8 @@ let mousedown;
 let DoSimulate = false;
 let simulation;
 let simbutton = document.querySelector("button");
+let pointtext = document.querySelector("p");
+let points = parseInt(pointtext.innerHTML);
 let eb;
 let firstcel;
 let lastcel;
@@ -137,7 +139,8 @@ function toggleCellState(cell) {
     } else {
         cell.classList = "true";
     }
-    
+    points += 1;
+    pointtext.innerHTML = points;
 }
 
 function simulatebutton() {

@@ -52,7 +52,7 @@ $celsize = 25;
         <input type="range" min="1" max="100" id="speed">
         <input type="range" min="1" max="100" id="size" value="<?= $celsize ?>">
         <a href="index.php"><button>Back</button></a>
-        <p><?=$points?> ferris-wheels</p>
+        <div><p><?=$points?></p><p>ferris-wheels</p></div>
     </div>
     <script>
         const width = <?= $width ?>;
