@@ -2,7 +2,7 @@
 
 include_once("connect.php");
     $dbhost = "localhost";
-    $dbname = "backend__eindproject";
+    $dbname = "kerremus_deepdive";
     $dbuser = "bit_academy";
     $dbpass = "bit_academy";
     
