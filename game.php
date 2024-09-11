@@ -17,23 +17,23 @@ $celsize = 25;
         <input type="range" min="1" max="100" id="speed">
         <input type="range" min="1" max="100" id="size" value="<?=$celsize?>">
     </div>
-        <table class="grid">
-            <?php
-            for ($row = 0; $row < $height; $row++) {
-                ?>
-                <tr>
-                    <?php
-                    for ($col = 0; $col < $width; $col++) {
-                        ?>
-                        <td class="false" id="<?=$row?>, <?=$col?>"></td>
-                        <?php
-                    }
-                    ?>
-                </tr>
-                <?php
-            }
+    <table class="grid">
+        <?php
+        for ($row = 0; $row < $height; $row++) {
             ?>
-        </table>
+            <tr>
+                <?php
+                for ($col = 0; $col < $width; $col++) {
+                    ?>
+                    <td class="false" id="<?=$row?>, <?=$col?>"></td>
+                    <?php
+                }
+                ?>
+            </tr>
+            <?php
+        }
+        ?>
+    </table>
 </body>
 <script src="game.js"></script>
 </html>
