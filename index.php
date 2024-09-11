@@ -11,7 +11,6 @@ include_once("connect.php");
   
   session_start();
   error_reporting(0);
-  $_SESSION['userid'] = '1';
 
 ?>
 <!DOCTYPE html>
@@ -34,7 +33,7 @@ include_once("connect.php");
       <button class="neon-btn" id="loadGameBtn">load game</button>
     <?php } ?>
     <button class="neon-btn" id="login" <?php if ($_SESSION['userid'] != null) { echo 'style="display:none;"'; } ?>>Login</button>
-    <button class="neon-btn" id="login" <?php if ($_SESSION['userid'] = null) { echo 'style="display:none;"'; } ?>>logout</button>
+    <button class="neon-btn" id="login" <?php if ($_SESSION['userid'] == null) { echo 'style="display:none;"'; } ?>>logout</button>
   </div>
 
   <h1 id="name2" style="display:none;">choose grid size</h1>
