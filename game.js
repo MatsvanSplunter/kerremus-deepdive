@@ -186,7 +186,6 @@ speedslider.addEventListener("mousemove", (e) => {
 
 sizeslider.addEventListener("mousemove", (e) => {
     cels.forEach((cel) => {
-        cel.style.width = `${sizeslider.value}px`;
-        cel.style.height = `${sizeslider.value}px`;
+        cel.style = `min-width: ${sizeslider.value}px; height: ${sizeslider.value}px;`;
     })
 });
