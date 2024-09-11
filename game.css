@@ -10,13 +10,15 @@
 }
 
 td {
-    width: 25px;
+    min-width: 25px;
     height: 25px;
 }
+
 body {
     width: 100%;
     background-color: black;
 }
+
 button, input {
     display: flex;
     position: relative;
@@ -37,11 +39,10 @@ button, input {
 .grid {
     display: -webkit-flex;
     display: flex;
-    width: max-content;
+    width: 100%;
     white-space: nowrap;
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
-    max-width: max-content;
 }
 
 body {
