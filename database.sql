@@ -20,7 +20,7 @@ CREATE TABLE gamesaves(
 CREATE TABLE patternsaves(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     pattern TEXT NOT NULL,
-    gamesize INT NOT NULL,
+    gamesize ENUM('small', 'medium', 'large') NOT NULL,
     userid INT NOT NULL
 );
 
