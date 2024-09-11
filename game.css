@@ -28,6 +28,8 @@ button, input {
     display: flex;
     position: relative;
     background-color: lightskyblue;
+    height: min-content;
+    padding: 5px;
 }
 
 .top-bar {
@@ -35,10 +37,12 @@ button, input {
     position: sticky;
     top: 0px;
     left: 0px;
-    padding: 20px;
+    padding: 10px;
     background-color: rgba(0, 255, 0, 0.5);
     width: auto;
     margin: 0px;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .bottom-bar {

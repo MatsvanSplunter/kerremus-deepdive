@@ -2,6 +2,7 @@
 
 $width = 0;
 $height = 0;
+$points = 0;
 if ($_POST['gridsize']) {
     switch ($_POST['gridsize']) {
         case 'small':
@@ -51,6 +52,7 @@ $celsize = 25;
         <input type="range" min="1" max="100" id="speed">
         <input type="range" min="1" max="100" id="size" value="<?= $celsize ?>">
         <a href="index.php"><button>Back</button></a>
+        <p><?=$points?> ferris-wheels</p>
     </div>
     <script>
         const width = <?= $width ?>;

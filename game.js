@@ -137,6 +137,7 @@ function toggleCellState(cell) {
     } else {
         cell.classList = "true";
     }
+    
 }
 
 function simulatebutton() {
