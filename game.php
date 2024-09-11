@@ -1,6 +1,6 @@
 <?php
-$width = 75;
-$height = 50;
+$width = 320;
+$height = 150;
 $celsize = 25;
 ?>
 <!DOCTYPE html>
@@ -12,28 +12,28 @@ $celsize = 25;
     <title>Document</title>
 </head>
 <body>
-    <div>
+    <div class="top-bar">
         <button onclick="simulatebutton()">Simulate</button>
         <input type="range" min="1" max="100" id="speed">
         <input type="range" min="1" max="100" id="size" value="<?=$celsize?>">
     </div>
-    <table>
-        <?php
-        for ($row = 0; $row < $height; $row++) {
-            ?>
-            <tr>
-                <?php
-                for ($col = 0; $col < $width; $col++) {
-                    ?>
-                    <td class="false" id="<?=$row?>, <?=$col?>"></td>
-                    <?php
-                }
-                ?>
-            </tr>
+        <table class="grid">
             <?php
-        }
-        ?>
-    </table>
+            for ($row = 0; $row < $height; $row++) {
+                ?>
+                <tr>
+                    <?php
+                    for ($col = 0; $col < $width; $col++) {
+                        ?>
+                        <td class="false" id="<?=$row?>, <?=$col?>"></td>
+                        <?php
+                    }
+                    ?>
+                </tr>
+                <?php
+            }
+            ?>
+        </table>
 </body>
 <script src="game.js"></script>
 </html>

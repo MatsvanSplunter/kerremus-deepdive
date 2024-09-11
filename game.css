@@ -14,16 +14,34 @@ td {
     height: 25px;
 }
 body {
-    width: max-content;
+    width: 100%;
     background-color: black;
 }
 button, input {
     display: flex;
     position: relative;
+    background-color: lightskyblue;
 }
-div {
+
+.top-bar {
     display: flex;
-    position: absolute;
+    position: sticky;
+    top: 0px;
+    left: 0px;
+    padding: 20px;
+    background-color: rgba(0, 255, 0, 0.5);
+    width: auto;
+    margin: 0px;
+}
+
+.grid {
+    display: -webkit-flex;
+    display: flex;
+    width: max-content;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    max-width: max-content;
 }
 
 body {
@@ -31,8 +49,7 @@ body {
     margin: 0;
     background-color: black;
     position: relative;
-    width: max-content;
-
+    width: 100%;
 }
 
 /* Background carousel */
@@ -42,6 +59,4 @@ body::before {
     background-size: cover;
     background-position: center;
     opacity: 0.2;
-    width: max-content;
-
 }
