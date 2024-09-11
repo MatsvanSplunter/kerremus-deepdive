@@ -7,6 +7,9 @@ USE kerremus_deepdive;
 CREATE TABLE user(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(32) NOT NULL,
+    color VARCHAR,
+    backgrountcolor VARCHAR,
+    celcolor VARCHAR,
     password VARCHAR(320) NOT NULL
 );
 
