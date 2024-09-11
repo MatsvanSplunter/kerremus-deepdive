@@ -40,6 +40,8 @@ addEventListener("mousedown", (e) => {
             firstcel = [x, y, bord[x][y].classList];
         }
     }
+    points += 1;
+    pointtext.innerHTML = points;
 });
 
 document.querySelector("table").addEventListener("mouseover", (event) => {
@@ -139,8 +141,6 @@ function toggleCellState(cell) {
     } else {
         cell.classList = "true";
     }
-    points += 1;
-    pointtext.innerHTML = points;
 }
 
 function simulatebutton() {
