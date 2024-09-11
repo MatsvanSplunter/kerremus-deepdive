@@ -5,6 +5,7 @@
 }
 .false {
     background-color: grey;
+    text-shadow: 0 0 5px #da8fff, 0 0 10px #da8fff, 0 0 20px #da8fff, 0 0 30px #da8fff, 0 0 40px #da8fff, 0 0 55px #da8fff, 0 0 75px #da8fff;
 }
 
 td {

@@ -28,7 +28,6 @@ if ($_GET["login_register"] == 'login') {
                     if ($row !== false) {
                         var_dump($row);
                         if (password_verify($password, $row['password'])) {
-                            $_SESSION['account'] = $_POST['gebruikersnaam'];
                             header("Location: index.php");
                             exit;
                         }

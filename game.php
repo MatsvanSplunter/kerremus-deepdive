@@ -1,5 +1,6 @@
 <?php
-$size = 100;
+$width = 75;
+$height = 50;
 $celsize = 25;
 ?>
 <!DOCTYPE html>
@@ -18,11 +19,11 @@ $celsize = 25;
     </div>
     <table>
         <?php
-        for ($row = 0; $row < $size; $row++) {
+        for ($row = 0; $row < $height; $row++) {
             ?>
             <tr>
                 <?php
-                for ($col = 0; $col < $size; $col++) {
+                for ($col = 0; $col < $width; $col++) {
                     ?>
                     <td class="false" id="<?=$row?>, <?=$col?>"></td>
                     <?php
