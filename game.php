@@ -1,5 +1,6 @@
 <?php
 
+$patterns = [];
 $width = 0;
 $height = 0;
 $points = 0;
@@ -84,7 +85,7 @@ $celsize = 25;
     </script>
     <div class="bottom-bar">
         <?php
-        if($patterns != []) {
+        if($patterns == []) {
             ?>
             <h3>no patterns saved</h3>
         </div>
