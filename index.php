@@ -39,7 +39,7 @@ include_once("connect.php");
   <h1 id="name2" style="display:none;">choose grid size</h1>
   <div class="buttons-container" id="newGameMenu" style="display:none;">
     <form method="post" action="game.php" class="buttons-container">    
-      <button class="neon-btn" id="backBtn">Back</button>
+      <button class="neon-btn" name="gridsize" value="back" id="backBtn">Back</button>
       <button class="neon-btn" name="gridsize" value="small" id="small">small</button>
       <button class="neon-btn" name="gridsize" value="medium" id="medium">medium</button>
       <button class="neon-btn" name="gridsize" value="large" id="large">large</button>
