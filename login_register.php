@@ -1,6 +1,5 @@
 <!-- login -->
 <?php
-error_reporting(0);
 if ($_GET["login_register"] == 'login') {
 
         include_once("connect.php");
@@ -23,7 +22,7 @@ if ($_GET["login_register"] == 'login') {
                 } else {
                     $password = $_POST['password'];
                     $stmt = $pdo->prepare('SELECT * FROM user WHERE username = :username');
-                    $stmt->execute([':username' => $_POST['username']]);
+                    $stmt->execute([':username' => $_POST['gebruikersnaam']]);
                     $row = $stmt->fetch(PDO::FETCH_ASSOC);
                     if ($row !== false) {
                         var_dump($row);

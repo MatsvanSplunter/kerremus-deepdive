@@ -19,6 +19,7 @@ $celsize = 25;
         <input type="range" min="1" max="100" id="speed">
         <input type="range" min="1" max="100" id="size" value="<?= $celsize ?>">
     </div>
+<<<<<<< HEAD
 
     <div>
         <div>
@@ -41,6 +42,25 @@ $celsize = 25;
             </table>
         </div>
     </div>
+=======
+    <table class="grid">
+        <?php
+        for ($row = 0; $row < $height; $row++) {
+            ?>
+            <tr>
+                <?php
+                for ($col = 0; $col < $width; $col++) {
+                    ?>
+                    <td class="false" id="<?=$row?>, <?=$col?>"></td>
+                    <?php
+                }
+                ?>
+            </tr>
+            <?php
+        }
+        ?>
+    </table>
+>>>>>>> fee99df86ad3964688a06a7ac5b5a4c2cc518ce0
 </body>
 <script src="game.js"></script>
 
