@@ -4,25 +4,25 @@ CREATE DATABASE kerremus_deepdive;
 
 USE kerremus_deepdive;
 
-CREATE TABLE user(
+CREATE TABLE `user`(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(32) NOT NULL,
-    color VARCHAR,
-    backgrountcolor VARCHAR,
-    celcolor VARCHAR,
+    color TEXT,
+    backgrountcolor TEXT,
+    celcolor TEXT,
     password VARCHAR(320) NOT NULL
-);
-
-CREATE TABLE gamesaves(
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    bord TEXT NOT NULL,
-    gamesize INT NOT NULL,
-    userid INT NOT NULL
 );
 
 CREATE TABLE patternsaves(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     pattern TEXT NOT NULL,
+    gamesize INT NOT NULL,
+    userid INT NOT NULL
+);
+
+CREATE TABLE gamesaves(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    bord TEXT NOT NULL,
     gamesize ENUM('small', 'medium', 'large') NOT NULL,
     userid INT NOT NULL
 );

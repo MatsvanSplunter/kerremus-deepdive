@@ -1,8 +1,8 @@
 <?php
 
-$width = 100;
-$height = 50;
-if($_POST) {
+$width = 0;
+$height = 0;
+if ($_POST['gridsize']) {
     switch ($_POST['gridsize']) {
         case 'small':
             $width = 100;
@@ -15,6 +15,9 @@ if($_POST) {
         case 'large':
             $width = 1000;
             $height = 500;
+            break;
+        case 'back':
+            header("location: index.php");
             break;
         default:
             break;
@@ -52,8 +55,8 @@ $celsize = 25;
             }
             tableHTML += "</tr>";
         }
-        table.innerHTML = tableHTML;
         document.body.appendChild(table);
+        table.innerHTML = tableHTML;
 
         document.documentElement.style.setProperty('--cell-size', '25px');
     </script>
@@ -76,20 +79,18 @@ $celsize = 25;
         bord[index] = Array.from(cellenInRow);
     });
 
-    console.log(bord);
-
     addEventListener("mouseup", (e) => {
         mousedown = false;
         firstcel = undefined;
         console.debug("mouseup");
     });
-    addEventListener("mousedown", (e) => { 
+    addEventListener("mousedown", (e) => {
         mousedown = true;
         eb = e.button;
         if (e.target.tagName === "TD") {
             let cell = e.target;
             let [x, y] = cell.id.split(",").map(Number);
-            if(e.button == 0 || e.button == 2) {
+            if (e.button == 0 || e.button == 2) {
                 toggleCellState(cell);
             }
             console.debug("mousedown");
@@ -105,7 +106,7 @@ $celsize = 25;
 
     document.querySelector("table").addEventListener("mouseover", (event) => {
         if (event.target.tagName === "TD") {
-            if(firstcel) {
+            if (firstcel) {
                 let cell = event.target;
                 let [x, y] = cell.id.split(",").map(Number);
                 lastcel = [x, y];
@@ -146,52 +147,46 @@ $celsize = 25;
     });
 
     function simulate() {
-        let celstrue = [];
-        let celsfalse = [];
+        let celchange = [];
 
-        for (let x = 0; x < width; x++) {
-            for (let y = 0; y < height; y++) {
+        for (let x = 0; x < bord.length; x += 1) {
+            for (let y = 0; y < bord[0].length; y += 1) {
                 let omringt = countNeighbors(x, y);
                 let cel = bord[x][y];
-
-                if (cel.classList.contains("false")) {
+                console.log(omringt);
+                if (cel.classList == "false") {
                     if (omringt == 3) {
-                        celstrue.push(cel);
+                        celchange.push(cel);
                     }
                 } else {
                     if (omringt != 2 && omringt != 3) {
-                        celsfalse.push(cel);
+                        celchange.push(cel);
                     }
                 }
             }
         }
-
-        requestAnimationFrame(() => {
-            celstrue.forEach(cel => {
-                cel.classList.replace("false", "true");
-            });
-            celsfalse.forEach(cel => {
-                cel.classList.replace("true", "false");
-            });
+        celchange.forEach(cel => {
+            toggleCellState(cel);
         });
     }
 
     function countNeighbors(x, y) {
-        let omringt = 0;
-        for (let dx = -1; dx <= 1; dx++) {
-            for (let dy = -1; dy <= 1; dy++) {
-                if (dx === 0 && dy === 0) continue;
+    let omringt = 0;
+    for (let dx = -1; dx <= 1; dx += 1) {
+        for (let dy = -1; dy <= 1; dy += 1) {
+            if (dx !== 0 && dy !== 0) {
                 let nx = x + dx;
                 let ny = y + dy;
-                if (nx >= 0 && ny >= 0 && nx < width && ny < height) {
-                    if (bord[nx][ny].classList.contains("true")) {
-                        omringt++;
+                if (nx >= 0 && ny >= 0 && nx < bord.length && ny < bord[0].length) {
+                    if (bord[nx][ny].classList == "true") {
+                        omringt += 1;
                     }
                 }
             }
         }
-        return omringt;
     }
+    return omringt;
+}
 
     function checkcel(classList, omringt) {
         if (classList == "true") {
@@ -201,7 +196,7 @@ $celsize = 25;
     }
 
     function toggleCellState(cell) {
-        if(cell.classList == "true") {
+        if (cell.classList == "true") {
             cell.classList = "false";
         } else {
             cell.classList = "true";
@@ -212,17 +207,11 @@ $celsize = 25;
         if (simbutton.innerHTML === "Simulate") {
             DoSimulate = true;
             simbutton.innerHTML = "Pause";
-            runSimulation();
+            simulation = setInterval(simulate, speed * 2);
         } else {
             DoSimulate = false;
             simbutton.innerHTML = "Simulate";
-        }
-    }
-
-    function runSimulation() {
-        if (DoSimulate) {
-            simulate();
-            requestAnimationFrame(runSimulation);
+            clearInterval(simulation);
         }
     }
 
@@ -255,7 +244,7 @@ $celsize = 25;
         }
     });
 
-    sizeslider.addEventListener("mousemove", () => {
+    sizeslider.addEventListener("change", () => {
         document.documentElement.style.setProperty('--cell-size', sizeslider.value + 'px');
     });
 </script>
