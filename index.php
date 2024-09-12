@@ -26,7 +26,7 @@ include_once("connect.php");
 <body>
 <div class="title">
 <div class="zoom-flash">
-  <h1 id="name">kerremus of live</h1>
+  <h1 id="name">kerremus of life</h1>
   <div class="buttons-container" id="mainMenu">
     <?php if ($_SESSION['userid'] != null) { ?>
       <button class="neon-btn" id="newGameBtn">new game</button>

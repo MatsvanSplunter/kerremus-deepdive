@@ -1,7 +1,7 @@
 <?php
 
 $patterns = [];
-$cell_glow = "cyan";
+$cell_glow = "#f6d9ff";
 $cell_color = "grey";
 $background_color = "black";
 $width = 0;
@@ -56,17 +56,24 @@ $celsize = 25;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="game.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Game of Life</title>
 </head>
 
 <body>
     <div class="top-bar">
-        <button onclick="simulatebutton()">Simulate</button>
-        <button onclick="simulate()">Step</button>
+        <button class="neon-btn" onclick="simulatebutton()">Simulate</button>
+        <button class="neon-btn" onclick="simulate()">Step</button>
+        <div class="range-container">
+        <i class='bx bx-timer bx-md'></i>
         <input type="range" min="1" max="100" id="speed">
+        </div>
+        <div class="range-container">
+        <i class='bx bx-expand bx-md'></i>
         <input type="range" min="1" max="100" id="size" value="<?= $celsize ?>">
-        <a href="index.php"><button>Back</button></a>
-        <div><p><?=$points?></p><p>ferris-wheels</p></div>
+        </div>
+        <a href="index.php"><button class="neon-btn">Back</button></a>
+        <div class="top-bar-coins"><p><?=$points?></p><p>ferris-wheels</p></div>
     </div>
     <script>
         const width = <?= $width ?>;

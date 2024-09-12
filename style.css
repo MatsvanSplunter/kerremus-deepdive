@@ -93,6 +93,15 @@ body::before {
   .neon-btn:nth-child(4) {
     animation-delay: 2s;
   }
+  .neon-btn:nth-child(5) {
+    animation-delay: 2.5s;
+  }
+  .neon-btn:nth-child(6) {
+    animation-delay: 3s;
+  }
+  .neon-btn:nth-child(7) {
+    animation-delay: 3.5s;
+  }
   
   .neon-btn::before {
       content: '';
