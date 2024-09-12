@@ -20,20 +20,20 @@ if (isset($_POST['function'])) {
         case "select":
             switch ($_POST['selected']) {
                 case 'glow':
-                    $_SESSION['select'] = [$_POST['color'], $_SESSION['select'][1], $_SESSION['select'][2]];
-                    var_dump($_SESSION['select']);
+                    $_SESSION['selected'] = [$_POST['color'], $_SESSION['selected'][1], $_SESSION['selected'][2]];
                     break;
                 case 'cell':
-                    $_SESSION['select'] = [$_SESSION['select'][0], $_POST['color'], $_SESSION['select'][2]];
-                    var_dump($_SESSION['select']);
+                    $_SESSION['selected'] = [$_SESSION['selected'][0], $_POST['color'], $_SESSION['selected'][2]];
                     break;
                 case 'background':
-                    $_SESSION['select'] = [$_SESSION['select'][0], $_SESSION['select'][1], $_POST['color']];
-                    var_dump($_SESSION['select']);
+                    $_SESSION['selected'] = [$_SESSION['selected'][0], $_SESSION['selected'][1], $_POST['color']];
                     break;
                 default:
                     echo "Invalid selection.";
             }
+            break;
+        case "points":
+            $_SESSION['points'] = $_POST['points'];
             break;
         default:
             echo "Invalid function call.";

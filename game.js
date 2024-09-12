@@ -21,6 +21,14 @@ addEventListener("mouseup", (e) => {
     mousedown = false;
     firstcel = undefined;
     console.debug("mouseup");
+    $.ajax({
+        type: "POST",
+        url: "data.php",
+        data: { function: "points", points: points },
+        success: function(response) {
+            console.log(response);
+        }
+    });
 });
 addEventListener("mousedown", (e) => {
     mousedown = true;

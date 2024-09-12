@@ -1,17 +1,26 @@
 <?php
 
 session_start();
+
 $patterns = [];
-$cell_glow = "#f6d9ff";
-$cell_color = "grey";
-$background_color = "black";
+
 if(!empty($_SESSION['selected'])) {
     [$cell_glow, $cell_color , $background_color] = $_SESSION['selected'];
-    var_dump($_SESSION['selected']);
+} else {
+    $cell_glow = "yellow";
+    $cell_color = "grey";
+    $background_color = "black";
 }
+
 $width = 0;
 $height = 0;
-$points = 0;
+
+if(!empty($_SESSION['points'])) {
+    $points = $_SESSION['points'];
+} else {
+    $points = 0;
+}
+
 if ($_POST['gridsize']) {
     switch ($_POST['gridsize']) {
         case 'small':
@@ -62,6 +71,7 @@ $celsize = 25;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="game.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Game of Life</title>
 </head>
 
