@@ -8,7 +8,7 @@ CREATE TABLE `user`(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(32) NOT NULL,
     color TEXT,
-    backgrountcolor TEXT,
+    backgroundcolor TEXT,
     celcolor TEXT,
     password VARCHAR(320) NOT NULL
 );
