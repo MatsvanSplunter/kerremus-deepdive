@@ -14,8 +14,24 @@ if($_POST['function']) {
             buy($pdo, $user, $_POST["buying"]);
             $_SESSION['points'] = $_POST['points'];
             break;
+        case "select":
+            switch ($_POST['selected']) {
+                case 'glow':
+                    $_SESSION['select'][0] = $_POST['color'];
+                    break;
+                case 'cel':
+                    $_SESSION['select'][2] = $_POST['color'];
+                    break;
+                case 'background':
+                    $_SESSION['select'][1] = $_POST['color'];
+                    break;
+                default:
+                    break;
+
+            }
+            break;
         default:
-        break;
+            break;
     }
 }
 
