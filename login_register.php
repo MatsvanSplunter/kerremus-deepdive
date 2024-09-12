@@ -1,19 +1,10 @@
 <!-- login -->
 <?php
+
+include_once("connect.php");
+session_start();
 if ($_GET["login_register"] == 'login') {
-
-        include_once("connect.php");
-        $dbhost = "localhost";
-        $dbname = "kerremus_deepdive";
-        $dbuser = "bit_academy";
-        $dbpass = "bit_academy";
-
         try {
-            $pdo = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            session_start();
-
             if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 if ($_POST['gebruikersnaam'] == "") {
                     echo 'fill in a username';
