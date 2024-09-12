@@ -18,7 +18,7 @@ document.getElementById('newGameBtn').addEventListener('click', function() {
     document.getElementById('loadGameMenu').style.display = 'flex';
     document.getElementById('name').style.display = 'none';
     document.getElementById('name3').style.display = 'block';
-  })
+  });
 
   document.getElementById('backBtn').addEventListener('click', function() {
     document.getElementById('newGameMenu').style.display = 'none';
@@ -36,4 +36,4 @@ document.getElementById('newGameBtn').addEventListener('click', function() {
 
   document.getElementById('shop').addEventListener('click', function() {
     window.location.href = 'shop.php';    
-  })
+  });

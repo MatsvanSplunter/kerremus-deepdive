@@ -7,16 +7,16 @@ try {
     $stmt = $pdo->prepare("SELECT * FROM user WHERE id = ?");
     $stmt->execute([$_SESSION['userid']]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($user) {
-        echo "User found: " . $user['username'];
-    } else {
-        echo "No user found with the given ID.";
-    }
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
 
-$points = 20000000;
+if(!empty($_SESSION['points'])) {
+    $points = $_SESSION['points'];
+} else {
+    $points = 0;
+}
+
 $selected = ["yellow", "grey", "black"];
 if(!empty($_SESSION['selected'])) {
     $selected = $_SESSION['selected'];
@@ -56,6 +56,9 @@ if(!empty($_SESSION['points'])) {
                 <button class="neon-btn" id="glow-yellow" value="select">select</button>
                 <?php
             }
+            $glow = explode(', ', $user['color']);
+            $cell = explode(', ', $user['celcolor']);
+            $background = explode(', ', $user['backgroundcolor']);
             ?>
         </div>
         <div class="cards">
@@ -63,12 +66,12 @@ if(!empty($_SESSION['points'])) {
             <img src="red.png" alt="red">
             <p id="glow-red">price: 200</p>
             <?php
-            if(gettype($user['color']) == "array") {
+            if(gettype($glow) == "array") {
                 if($selected[0] == "red") {
                 ?>
                 <button class="neon-btn" id="glow-red" value="selected">selected</button>
                 <?php
-                } else if (array_search('red', $user['color'])) {
+                } else if (array_search('red', $glow)) {
                     ?>
                     <button class="neon-btn" id="glow-red" value="select">select</button>
                     <?php
@@ -89,12 +92,12 @@ if(!empty($_SESSION['points'])) {
             <img src="pink.png" alt="red">
             <p id="glow-pink">price: 600</p>
             <?php
-            if(gettype($user['color']) == "array") {
+            if(gettype($glow) == "array") {
                 if($selected[0] == "pink") {
                     ?>
                     <button class="neon-btn" id="glow-pink" value="selected">selected</button>
                     <?php
-                } else if (array_search('pink', $user['color'])) {
+                } else if (array_search('pink', $glow)) {
                     ?>
                     <button class="neon-btn" id="glow-pink" value="select">select</button>
                     <?php
@@ -115,12 +118,12 @@ if(!empty($_SESSION['points'])) {
             <img src="blue.png" alt="red">
             <p id="glow-blue">price: 800</p>
             <?php
-            if(gettype($user['color']) == "array") {
+            if(gettype($glow) == "array") {
                 if($selected[0] == "blue") {
                 ?>
                 <button class="neon-btn" id="glow-blue" value="selected">selected</button>
                 <?php
-                } else if (array_search('blue', $user['color'])) {
+                } else if (array_search('blue', $glow)) {
                     ?>
                     <button class="neon-btn" id="glow-blue" value="select">select</button>
                     <?php
@@ -141,12 +144,12 @@ if(!empty($_SESSION['points'])) {
             <img src="orange.png" alt="red">
             <p id="glow-orange">price: 1k</p>
             <?php
-            if(gettype($user['color']) == "array") {
+            if(gettype($glow) == "array") {
                 if($selected[0] == "orange") {
                 ?>
                 <button class="neon-btn" id="glow-orange" value="selected">selected</button>
                 <?php
-                } else if (array_search('orange', $user['color'])) {
+                } else if (array_search('orange', $glow)) {
                     ?>
                     <button class="neon-btn" id="glow-orange" value="select">select</button>
                     <?php
@@ -184,12 +187,12 @@ if(!empty($_SESSION['points'])) {
             <h1>red</h1>
             <p id="cell-red">price: 400</p>
             <?php
-            if(gettype($user['celcolor']) == "array") {
+            if(gettype($cell) == "array") {
                 if($selected[1] == "red") {
                 ?>
                 <button class="neon-btn" id="cell-red" value="selected">selected</button>
                 <?php
-                } else if (array_search('red', $user['celcolor'])) {
+                } else if (array_search('red', $cell)) {
                     ?>
                     <button class="neon-btn" id="cell-red" value="select">select</button>
                     <?php
@@ -209,12 +212,12 @@ if(!empty($_SESSION['points'])) {
             <h1>pink</h1>
             <p id="cell-pink">price: 600</p>
             <?php
-            if(gettype($user['celcolor']) == "array") {
+            if(gettype($cell) == "array") {
                 if($selected[1] == "pink") {
                 ?>
                 <button class="neon-btn" id="cell-pink" value="selected">selected</button>
                 <?php
-                } else if (array_search('pink', $user['celcolor'])) {
+                } else if (array_search('pink', $cell)) {
                     ?>
                     <button class="neon-btn" id="cell-pink" value="select">select</button>
                     <?php
@@ -234,12 +237,12 @@ if(!empty($_SESSION['points'])) {
             <h1>transparent</h1>
             <p id="cell-transparent">price: 2k</p>
             <?php
-            if(gettype($user['celcolor']) == "array") {
+            if(gettype($cell) == "array") {
                 if($selected[1] == "transparent") {
                 ?>
                 <button class="neon-btn" id="cell-transparent" value="selected">selected</button>
                 <?php
-                } else if (array_search('transparent', $user['celcolor'])) {
+                } else if (array_search('transparent', $cell)) {
                     ?>
                     <button class="neon-btn" id="cell-transparent" value="select">select</button>
                     <?php
@@ -259,12 +262,12 @@ if(!empty($_SESSION['points'])) {
             <h1>black</h1>
             <p id="cell-black">price: 10k</p>
             <?php
-            if(gettype($user['celcolor']) == "array") {
+            if(gettype($cell) == "array") {
                 if($selected[1] == "black") {
                 ?>
                 <button class="neon-btn" id="cell-black" value="selected">selected</button>
                 <?php
-                } else if (array_search('black', $user['celcolor'])) {
+                } else if (array_search('black', $cell)) {
                     ?>
                     <button class="neon-btn" id="cell-black" value="select">select</button>
                     <?php
@@ -302,12 +305,12 @@ if(!empty($_SESSION['points'])) {
             <h1>yellow</h1>
             <p id="background-yellow">price: 400</p>
             <?php
-            if(gettype($user['backgroundcolor']) == "array") {
+            if(gettype($background) == "array") {
                 if($selected[2] == "yellow") {
                 ?>
                 <button class="neon-btn" id="background-yellow" value="selected">selected</button>
                 <?php
-                } else if (array_search('yellow', $user['backgroundcolor'])) {
+                } else if (array_search('yellow', $background)) {
                     ?>
                     <button class="neon-btn" id="background-yellow" value="select">select</button>
                     <?php
@@ -327,12 +330,12 @@ if(!empty($_SESSION['points'])) {
             <h1>blue</h1>
             <p id="background-blue">price: 600</p>
             <?php
-            if(gettype($user['backgroundcolor']) == "array") {
+            if(gettype($background) == "array") {
                 if($selected[2] == "blue") {
                 ?>
                 <button class="neon-btn" id="background-blue" value="selected">selected</button>
                 <?php
-                } else if (array_search('blue', $user['backgroundcolor'])) {
+                } else if (array_search('blue', $background)) {
                     ?>
                     <button class="neon-btn" id="background-blue" value="select">select</button>
                     <?php
@@ -352,12 +355,12 @@ if(!empty($_SESSION['points'])) {
             <h1>red</h1>
             <p id="background-red">price: 800</p>
             <?php
-            if(gettype($user['backgroundcolor']) == "array") {
+            if(gettype($background) == "array") {
                 if($selected[2] == "red") {
                 ?>
                 <button class="neon-btn" id="background-red" value="selected">selected</button>
                 <?php
-                } else if (array_search('red', $user['backgroundcolor'])) {
+                } else if (array_search('red', $background)) {
                     ?>
                     <button class="neon-btn" id="background-red" value="select">select</button>
                     <?php
@@ -377,12 +380,12 @@ if(!empty($_SESSION['points'])) {
             <h1>white</h1>
             <p id="background-white">price: 1k</p>
             <?php
-            if(gettype($user['backgroundcolor']) == "array") {
+            if(gettype($background) == "array") {
                 if($selected[2] == "white") {
                 ?>
                 <button class="neon-btn" id="background-white" value="selected">selected</button>
                 <?php
-                } else if (array_search('white', $user['backgroundcolor'])) {
+                } else if (array_search('white', $background)) {
                     ?>
                     <button class="neon-btn" id="background-white" value="select">select</button>
                     <?php
@@ -419,12 +422,14 @@ function refresh() {
             select.push(button);
         }
     });
+
 }
 
 window.addEventListener("click", (event) => {
     if (event.target.tagName === "BUTTON") {
         let button = event.target;
-        if(button.value == "buy") {
+        
+        if (button.value === "buy") {
             let priceElement = Array.from(prices).find((price) => price.id == button.id);
             let price = priceElement ? priceElement.innerHTML.substr(7) : null;
 
@@ -435,48 +440,47 @@ window.addEventListener("click", (event) => {
                     price = parseInt(price);
                 }
 
-                if(points >= price) {
+                if (points >= price) {
                     points -= price;
+
                     $.ajax({
-                        method: "POST",
+                        type: "POST",
                         url: "data.php",
-                        data: { function: "buy", buying: button.id, points: price }
-                    })
-                    .done(function(response) {
-                        $("p.broken").html(response);
+                        data: { function: "buy", buying: button.id, points: points },
+                        success: function(response) {
+                            console.log(response);
+                            button.value = "select";
+                            button.innerHTML = "select";
+                        }
                     });
-                    button.value = "select";
-                    button.innerHTML = "select";
-                    console.log("bought");
                 } else {
-                    console.log("You don't have enough points. Click more in the game to get more points.");
+                    console.log("Not enough points.");
                 }
-            } else {
-                console.log("Price not found for this item.");
             }
-        } else if (button.value == "select") {
-            let button = event.target;
+        } else if (button.value === "select") {
             let [type, color] = button.id.split("-");
             button.value = "selected";
             button.innerHTML = "selected";
-            selected.forEach((button2) => {
-                if(button2.id.split("-")[0] == type) {
-                    button2.value = "select";
-                    button2.innerHTML = "select";
+
+            selected.forEach((btn) => {
+                if (btn.id.split("-")[0] === type) {
+                    btn.value = "select";
+                    btn.innerHTML = "select";
                 }
             });
+
             $.ajax({
-                method: "POST",
+                type: "POST",
                 url: "data.php",
-                data: { function: "select", selected: type, color: color }
-            })
-            .done(function(response) {
-                $("p.broken").html(response);
+                data: { function: "select", selected: type, color: color },
+                success: function(response) {
+                    console.log(response);
+                }
             });
         }
+
         refresh();
     }
 });
-refresh();
 </script>
 </html>
