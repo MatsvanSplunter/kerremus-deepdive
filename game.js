@@ -198,3 +198,4 @@ speedslider.addEventListener("mousemove", (e) => {
 sizeslider.addEventListener("change", () => {
     document.documentElement.style.setProperty('--cell-size', sizeslider.value + 'px');
 });
+
