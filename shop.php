@@ -7,11 +7,6 @@ try {
     $stmt = $pdo->prepare("SELECT * FROM user WHERE id = ?");
     $stmt->execute([$_SESSION['userid']]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($user) {
-        echo "User found: " . $user['username'];
-    } else {
-        echo "No user found with the given ID.";
-    }
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
@@ -419,6 +414,7 @@ function refresh() {
             select.push(button);
         }
     });
+
 }
 
 window.addEventListener("click", (event) => {

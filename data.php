@@ -6,11 +6,6 @@ try {
     $stmt = $pdo->prepare("SELECT * FROM user WHERE id = ?");
     $stmt->execute([$_SESSION['userid']]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($user) {
-        echo "User found: " . $user['username'];
-    } else {
-        echo "No user found with the given ID.";
-    }
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
@@ -25,16 +20,16 @@ if (isset($_POST['function'])) {
         case "select":
             switch ($_POST['selected']) {
                 case 'glow':
-                    $_SESSION['select'][0] = $_POST['color'];
-                    echo "Glow color selected: " . $_POST['color'];
+                    $_SESSION['select'] = [$_POST['color'], $_SESSION['select'][1], $_SESSION['select'][2]];
+                    var_dump($_SESSION['select']);
                     break;
-                case 'cel':
-                    $_SESSION['select'][1] = $_POST['color'];
-                    echo "Cell color selected: " . $_POST['color'];
+                case 'cell':
+                    $_SESSION['select'] = [$_SESSION['select'][0], $_POST['color'], $_SESSION['select'][2]];
+                    var_dump($_SESSION['select']);
                     break;
                 case 'background':
-                    $_SESSION['select'][2] = $_POST['color'];
-                    echo "Background color selected: " . $_POST['color'];
+                    $_SESSION['select'] = [$_SESSION['select'][0], $_SESSION['select'][1], $_POST['color']];
+                    var_dump($_SESSION['select']);
                     break;
                 default:
                     echo "Invalid selection.";

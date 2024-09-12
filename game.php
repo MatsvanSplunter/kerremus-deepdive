@@ -6,9 +6,8 @@ $cell_glow = "#f6d9ff";
 $cell_color = "grey";
 $background_color = "black";
 if(!empty($_SESSION['selected'])) {
-    $cell_glow = $_SESSION['selected'][0];
-    $cell_color = $_SESSION['selected'][1];
-    $background_color = $_SESSION['selected'][2];
+    [$cell_glow, $cell_color , $background_color] = $_SESSION['selected'];
+    var_dump($_SESSION['selected']);
 }
 $width = 0;
 $height = 0;
