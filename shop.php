@@ -3,7 +3,7 @@
 include_once("connect.php");
 
 session_start();
-$stmt = $pdo->query("SELECT * FROM users WHERE id = ?");
+$stmt = $pdo->query("SELECT * FROM user WHERE id = ?");
 $user = $stmt->fetch($_SESSION['userid']);
 
 $points = 20000000;

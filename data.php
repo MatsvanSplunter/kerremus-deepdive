@@ -5,7 +5,7 @@
 include("connect.php");
 session_start();
 
-$stmt = $pdo->query("SELECT * FROM users WHERE id = ?");
+$stmt = $pdo->query("SELECT * FROM user WHERE id = ?");
 $user = $stmt->fetch($_SESSION['userid']);
 
 if($_POST['function']) {
