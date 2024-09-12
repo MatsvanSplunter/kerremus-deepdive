@@ -34,6 +34,6 @@ document.getElementById('newGameBtn').addEventListener('click', function() {
     document.getElementById('name3').style.display = 'none';
   });
 
-  document.getElementById('small').addEventListener('click', function() {
-    window.location.href = 'index.php';    
+  document.getElementById('shop').addEventListener('click', function() {
+    window.location.href = 'shop.php';    
   })
