@@ -4,22 +4,22 @@
 }*/
 
 td.true {
-    background-color: cyan;
-    box-shadow: 0 0 20px cyan, 0 0 30px cyan, inset 0 0 7px cyan;
+    background-color: var(--cell-glow);
+    box-shadow: 0 0 20px var(--cell-glow), 0 0 30px var(--cell-glow), inset 0 0 7px var(--cell-glow);
 }
 
 td.false {
-    background-color: grey;
+    background-color: var(--cell-color);
 }
 
 td {
     min-width: var(--cell-size);
     height: var(--cell-size);
+    border-color: transparent;
 }
 
 body {
     width: max-content;
-    background-color: white;
     width: 100%;
     background-color: black;
 }
@@ -74,7 +74,6 @@ button, input {
 body {
     padding: 0;
     margin: 0;
-    background-color: black;
     position: relative;
     width: 100%;
     height: 100%;
