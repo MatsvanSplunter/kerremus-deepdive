@@ -20,6 +20,8 @@ $points = 20000000;
 $selected = ["yellow", "grey", "black"];
 if(!empty($_SESSION['selected'])) {
     $selected = $_SESSION['selected'];
+} else {
+    $_SESSION['selected'] = $selected;
 }
 if(!empty($_SESSION['points'])) {
     $points = $_SESSION['points'];

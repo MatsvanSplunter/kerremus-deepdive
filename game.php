@@ -1,9 +1,15 @@
 <?php
 
+session_start();
 $patterns = [];
 $cell_glow = "#f6d9ff";
 $cell_color = "grey";
 $background_color = "black";
+if(!empty($_SESSION['selected'])) {
+    $cell_glow = $_SESSION['selected'][0];
+    $cell_color = $_SESSION['selected'][1];
+    $background_color = $_SESSION['selected'][2];
+}
 $width = 0;
 $height = 0;
 $points = 0;
