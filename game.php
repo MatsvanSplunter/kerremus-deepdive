@@ -2,7 +2,8 @@
 
 $patterns = [];
 $cell_glow = "cyan";
-$cell_color = "black";
+$cell_color = "grey";
+$background_color = "black";
 $width = 0;
 $height = 0;
 $points = 0;
@@ -85,6 +86,7 @@ $celsize = 25;
 
         document.documentElement.style.setProperty('--cell-glow', "<?=$cell_glow?>");
         document.documentElement.style.setProperty('--cell-color', "<?=$cell_color?>");
+        document.documentElement.style.setProperty('--background-color', "<?=$background_color?>");
         document.documentElement.style.setProperty('--cell-size', '25px');
     </script>
     <div class="bottom-bar">

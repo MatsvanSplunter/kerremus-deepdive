@@ -21,7 +21,7 @@ td {
 body {
     width: max-content;
     width: 100%;
-    background-color: black;
+    background-color: var(--background-color);
 }
 
 button, input {
