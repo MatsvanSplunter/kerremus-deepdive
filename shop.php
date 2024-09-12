@@ -424,7 +424,8 @@ function refresh() {
 window.addEventListener("click", (event) => {
     if (event.target.tagName === "BUTTON") {
         let button = event.target;
-        if(button.value == "buy") {
+        
+        if (button.value === "buy") {
             let priceElement = Array.from(prices).find((price) => price.id == button.id);
             let price = priceElement ? priceElement.innerHTML.substr(7) : null;
 
@@ -435,48 +436,47 @@ window.addEventListener("click", (event) => {
                     price = parseInt(price);
                 }
 
-                if(points >= price) {
+                if (points >= price) {
                     points -= price;
+
                     $.ajax({
-                        method: "POST",
+                        type: "POST",
                         url: "data.php",
-                        data: { function: "buy", buying: button.id, points: price }
-                    })
-                    .done(function(response) {
-                        $("p.broken").html(response);
+                        data: { function: "buy", buying: button.id, points: points },
+                        success: function(response) {
+                            console.log(response);
+                            button.value = "select";
+                            button.innerHTML = "select";
+                        }
                     });
-                    button.value = "select";
-                    button.innerHTML = "select";
-                    console.log("bought");
                 } else {
-                    console.log("You don't have enough points. Click more in the game to get more points.");
+                    console.log("Not enough points.");
                 }
-            } else {
-                console.log("Price not found for this item.");
             }
-        } else if (button.value == "select") {
-            let button = event.target;
+        } else if (button.value === "select") {
             let [type, color] = button.id.split("-");
             button.value = "selected";
             button.innerHTML = "selected";
-            selected.forEach((button2) => {
-                if(button2.id.split("-")[0] == type) {
-                    button2.value = "select";
-                    button2.innerHTML = "select";
+
+            selected.forEach((btn) => {
+                if (btn.id.split("-")[0] === type) {
+                    btn.value = "select";
+                    btn.innerHTML = "select";
                 }
             });
+
             $.ajax({
-                method: "POST",
+                type: "POST",
                 url: "data.php",
-                data: { function: "select", selected: type, color: color }
-            })
-            .done(function(response) {
-                $("p.broken").html(response);
+                data: { function: "select", selected: type, color: color },
+                success: function(response) {
+                    console.log(response);
+                }
             });
         }
+
         refresh();
     }
 });
-refresh();
 </script>
 </html>
