@@ -1,5 +1,5 @@
 document.getElementById('login').addEventListener('click', function() {
-  window.location.href = 'login_register.php';    
+  window.location.href = 'login_register.php?login_register=!login';    
   });
 
   document.getElementById('logout').addEventListener('click', function() {
