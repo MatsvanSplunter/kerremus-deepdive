@@ -5,8 +5,18 @@
 include("connect.php");
 session_start();
 
-$stmt = $pdo->query("SELECT * FROM user WHERE id = ?");
-$user = $stmt->fetch($_SESSION['userid']);
+try {
+    $stmt = $pdo->prepare("SELECT * FROM user WHERE id = ?");
+    $stmt->execute([$_SESSION['userid']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($user) {
+        echo "User found: " . $user['username'];
+    } else {
+        echo "No user found with the given ID.";
+    }
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
 
 if($_POST['function']) {
     switch ($_POST["function"]) {

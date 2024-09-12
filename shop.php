@@ -1,10 +1,20 @@
 <?php
 
+session_start();
 include_once("connect.php");
 
-session_start();
-$stmt = $pdo->query("SELECT * FROM user WHERE id = ?");
-$user = $stmt->fetch($_SESSION['userid']);
+try {
+    $stmt = $pdo->prepare("SELECT * FROM user WHERE id = ?");
+    $stmt->execute([$_SESSION['userid']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($user) {
+        echo "User found: " . $user['username'];
+    } else {
+        echo "No user found with the given ID.";
+    }
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
 
 $points = 20000000;
 $selected = ["yellow", "grey", "black"];
@@ -35,9 +45,13 @@ if(!empty($_SESSION['points'])) {
             <img src="yellow.png" alt="yellow">
             <p id="glow-yellow">free</p>
             <?php
-            if($selected[0] = "yellow") {
+            if($selected[0] == "yellow") {
                 ?>
                 <button class="neon-btn" id="glow-yellow" value="selected">selected</button>
+                <?php
+            } else {
+                ?>
+                <button class="neon-btn" id="glow-yellow" value="select">select</button>
                 <?php
             }
             ?>
@@ -47,10 +61,24 @@ if(!empty($_SESSION['points'])) {
             <img src="red.png" alt="red">
             <p id="glow-red">price: 200</p>
             <?php
-            if($selected[0] = "red") {
-            ?>
-            <button class="neon-btn" id="glow-red" value="selected">selected</button>
-            <?php
+            if(gettype($user['color']) == "array") {
+                if($selected[0] == "red") {
+                ?>
+                <button class="neon-btn" id="glow-red" value="selected">selected</button>
+                <?php
+                } else if (array_search('red', $user['color'])) {
+                    ?>
+                    <button class="neon-btn" id="glow-red" value="select">select</button>
+                    <?php
+                } else {
+                    ?>
+                    <button class="neon-btn" id="glow-red" value="buy">buy</button>
+                    <?php
+                }
+            } else {
+                ?>
+                <button class="neon-btn" id="glow-red" value="buy">buy</button>
+                <?php
             }
             ?>
         </div>
@@ -59,10 +87,24 @@ if(!empty($_SESSION['points'])) {
             <img src="pink.png" alt="red">
             <p id="glow-pink">price: 600</p>
             <?php
-            if($selected[0] = "pink") {
-            ?>
-            <button class="neon-btn" id="glow-pink" value="selected">selected</button>
-            <?php
+            if(gettype($user['color']) == "array") {
+                if($selected[0] == "pink") {
+                    ?>
+                    <button class="neon-btn" id="glow-pink" value="selected">selected</button>
+                    <?php
+                } else if (array_search('pink', $user['color'])) {
+                    ?>
+                    <button class="neon-btn" id="glow-pink" value="select">select</button>
+                    <?php
+                } else {
+                    ?>
+                    <button class="neon-btn" id="glow-pink" value="buy">buy</button>
+                    <?php
+                }
+            } else {
+                ?>
+                <button class="neon-btn" id="glow-pink" value="buy">buy</button>
+                <?php
             }
             ?>
         </div>
@@ -71,10 +113,24 @@ if(!empty($_SESSION['points'])) {
             <img src="blue.png" alt="red">
             <p id="glow-blue">price: 800</p>
             <?php
-            if($selected[0] = "blue") {
-            ?>
-            <button class="neon-btn" id="glow-blue" value="selected">selected</button>
-            <?php
+            if(gettype($user['color']) == "array") {
+                if($selected[0] == "blue") {
+                ?>
+                <button class="neon-btn" id="glow-blue" value="selected">selected</button>
+                <?php
+                } else if (array_search('blue', $user['color'])) {
+                    ?>
+                    <button class="neon-btn" id="glow-blue" value="select">select</button>
+                    <?php
+                } else {
+                    ?>
+                    <button class="neon-btn" id="glow-blue" value="buy">buy</button>
+                    <?php
+                }
+            } else {
+                ?>
+                <button class="neon-btn" id="glow-blue" value="buy">buy</button>
+                <?php
             }
             ?>
         </div>
@@ -83,10 +139,24 @@ if(!empty($_SESSION['points'])) {
             <img src="orange.png" alt="red">
             <p id="glow-orange">price: 1k</p>
             <?php
-            if($selected[0] = "orange") {
-            ?>
-            <button class="neon-btn" id="glow-orange" value="selected">selected</button>
-            <?php
+            if(gettype($user['color']) == "array") {
+                if($selected[0] == "orange") {
+                ?>
+                <button class="neon-btn" id="glow-orange" value="selected">selected</button>
+                <?php
+                } else if (array_search('orange', $user['color'])) {
+                    ?>
+                    <button class="neon-btn" id="glow-orange" value="select">select</button>
+                    <?php
+                } else {
+                    ?>
+                    <button class="neon-btn" id="glow-orange" value="buy">buy</button>
+                    <?php
+                }
+            } else {
+                ?>
+                <button class="neon-btn" id="glow-orange" value="buy">buy</button>
+                <?php
             }
             ?>
         </div>
@@ -97,9 +167,13 @@ if(!empty($_SESSION['points'])) {
             <h1>grey</h1>
             <p id="cell-grey">free</p>
             <?php
-            if($selected[1] = "grey") {
+            if($selected[1] == "grey") {
             ?>
             <button class="neon-btn" id="cell-grey" value="selected">selected</button>
+            <?php
+            } else {
+            ?>
+            <button class="neon-btn" id="cell-grey" value="select">select</button>
             <?php
             }
             ?>
@@ -108,10 +182,24 @@ if(!empty($_SESSION['points'])) {
             <h1>red</h1>
             <p id="cell-red">price: 400</p>
             <?php
-            if($selected[1] = "red") {
-            ?>
-            <button class="neon-btn" id="cell-red" value="selected">selected</button>
-            <?php
+            if(gettype($user['celcolor']) == "array") {
+                if($selected[1] == "red") {
+                ?>
+                <button class="neon-btn" id="cell-red" value="selected">selected</button>
+                <?php
+                } else if (array_search('red', $user['celcolor'])) {
+                    ?>
+                    <button class="neon-btn" id="cell-red" value="select">select</button>
+                    <?php
+                } else {
+                    ?>
+                    <button class="neon-btn" id="cell-red" value="buy">buy</button>
+                    <?php
+                }
+            } else {
+                ?>
+                <button class="neon-btn" id="cell-red" value="buy">buy</button>
+                <?php
             }
             ?>
         </div>
@@ -119,10 +207,24 @@ if(!empty($_SESSION['points'])) {
             <h1>pink</h1>
             <p id="cell-pink">price: 600</p>
             <?php
-            if($selected[1] = "pink") {
-            ?>
-            <button class="neon-btn" id="cell-pink" value="selected">selected</button>
-            <?php
+            if(gettype($user['celcolor']) == "array") {
+                if($selected[1] == "pink") {
+                ?>
+                <button class="neon-btn" id="cell-pink" value="selected">selected</button>
+                <?php
+                } else if (array_search('pink', $user['celcolor'])) {
+                    ?>
+                    <button class="neon-btn" id="cell-pink" value="select">select</button>
+                    <?php
+                } else {
+                    ?>
+                    <button class="neon-btn" id="cell-pink" value="buy">buy</button>
+                    <?php
+                }
+            } else {
+                ?>
+                <button class="neon-btn" id="cell-pink" value="buy">buy</button>
+                <?php
             }
             ?>
         </div>
@@ -130,10 +232,24 @@ if(!empty($_SESSION['points'])) {
             <h1>transparent</h1>
             <p id="cell-transparent">price: 2k</p>
             <?php
-            if($selected[1] = "transparent") {
-            ?>
-            <button class="neon-btn" id="cell-transparent" value="selected">selected</button>
-            <?php
+            if(gettype($user['celcolor']) == "array") {
+                if($selected[1] == "transparent") {
+                ?>
+                <button class="neon-btn" id="cell-transparent" value="selected">selected</button>
+                <?php
+                } else if (array_search('transparent', $user['celcolor'])) {
+                    ?>
+                    <button class="neon-btn" id="cell-transparent" value="select">select</button>
+                    <?php
+                } else {
+                    ?>
+                    <button class="neon-btn" id="cell-transparent" value="buy">buy</button>
+                    <?php
+                }
+            } else {
+                ?>
+                <button class="neon-btn" id="cell-transparent" value="buy">buy</button>
+                <?php
             }
             ?>
         </div>
@@ -141,10 +257,24 @@ if(!empty($_SESSION['points'])) {
             <h1>black</h1>
             <p id="cell-black">price: 10k</p>
             <?php
-            if($selected[1] = "black") {
-            ?>
-             <button class="neon-btn" id="cell-black" value="selected">selected</button>
-            <?php
+            if(gettype($user['celcolor']) == "array") {
+                if($selected[1] == "black") {
+                ?>
+                <button class="neon-btn" id="cell-black" value="selected">selected</button>
+                <?php
+                } else if (array_search('black', $user['celcolor'])) {
+                    ?>
+                    <button class="neon-btn" id="cell-black" value="select">select</button>
+                    <?php
+                } else {
+                    ?>
+                    <button class="neon-btn" id="cell-black" value="buy">buy</button>
+                    <?php
+                }
+            } else {
+                ?>
+                <button class="neon-btn" id="cell-black" value="buy">buy</button>
+                <?php
             }
             ?>
         </div>
@@ -155,10 +285,14 @@ if(!empty($_SESSION['points'])) {
             <h1>black</h1>
             <p id="background-black">free</p>
             <?php
-            if($selected[2] = "black") {
+            if($selected[2] == "black") {
             ?>
             <button class="neon-btn" id="background-black" value="selected">selected</button>
             <?php
+            } else {
+                ?>
+                <button class="neon-btn" id="background-black" value="select">select</button>
+                <?php
             }
             ?>
         </div>
@@ -166,10 +300,24 @@ if(!empty($_SESSION['points'])) {
             <h1>yellow</h1>
             <p id="background-yellow">price: 400</p>
             <?php
-            if($selected[2] = "yellow") {
-            ?>
-            <button class="neon-btn" id="background-yellow" value="selected">selected</button>
-            <?php
+            if(gettype($user['backgroundcolor']) == "array") {
+                if($selected[2] == "yellow") {
+                ?>
+                <button class="neon-btn" id="background-yellow" value="selected">selected</button>
+                <?php
+                } else if (array_search('yellow', $user['backgroundcolor'])) {
+                    ?>
+                    <button class="neon-btn" id="background-yellow" value="select">select</button>
+                    <?php
+                } else {
+                    ?>
+                    <button class="neon-btn" id="background-yellow" value="buy">buy</button>
+                    <?php
+                }
+            } else {
+                ?>
+                <button class="neon-btn" id="background-yellow" value="buy">buy</button>
+                <?php
             }
             ?>
         </div>
@@ -177,10 +325,24 @@ if(!empty($_SESSION['points'])) {
             <h1>blue</h1>
             <p id="background-blue">price: 600</p>
             <?php
-            if($selected[2] = "blue") {
-            ?>
-            <button class="neon-btn" id="background-blue" value="selected">selected</button>
-            <?php
+            if(gettype($user['backgroundcolor']) == "array") {
+                if($selected[2] == "blue") {
+                ?>
+                <button class="neon-btn" id="background-blue" value="selected">selected</button>
+                <?php
+                } else if (array_search('blue', $user['backgroundcolor'])) {
+                    ?>
+                    <button class="neon-btn" id="background-blue" value="select">select</button>
+                    <?php
+                } else {
+                    ?>
+                    <button class="neon-btn" id="background-blue" value="buy">buy</button>
+                    <?php
+                }
+            } else {
+                ?>
+                <button class="neon-btn" id="background-blue" value="buy">buy</button>
+                <?php
             }
             ?>
         </div>
@@ -188,10 +350,24 @@ if(!empty($_SESSION['points'])) {
             <h1>red</h1>
             <p id="background-red">price: 800</p>
             <?php
-            if($selected[2] = "red") {
-            ?>
-            <button class="neon-btn" id="background-red" value="selected">selected</button>
-            <?php
+            if(gettype($user['backgroundcolor']) == "array") {
+                if($selected[2] == "red") {
+                ?>
+                <button class="neon-btn" id="background-red" value="selected">selected</button>
+                <?php
+                } else if (array_search('red', $user['backgroundcolor'])) {
+                    ?>
+                    <button class="neon-btn" id="background-red" value="select">select</button>
+                    <?php
+                } else {
+                    ?>
+                    <button class="neon-btn" id="background-red" value="buy">buy</button>
+                    <?php
+                }
+            } else {
+                ?>
+                <button class="neon-btn" id="background-red" value="buy">buy</button>
+                <?php
             }
             ?>
         </div>
@@ -199,11 +375,25 @@ if(!empty($_SESSION['points'])) {
             <h1>white</h1>
             <p id="background-white">price: 1k</p>
             <?php
-            if($selected[2] = "white") {
-            ?>
-            <button class="neon-btn" id="background-white" value="selected">selected</button>
-            <?php
-            } else if($user[''])
+            if(gettype($user['backgroundcolor']) == "array") {
+                if($selected[2] == "white") {
+                ?>
+                <button class="neon-btn" id="background-white" value="selected">selected</button>
+                <?php
+                } else if (array_search('white', $user['backgroundcolor'])) {
+                    ?>
+                    <button class="neon-btn" id="background-white" value="select">select</button>
+                    <?php
+                } else {
+                    ?>
+                    <button class="neon-btn" id="background-white" value="buy">buy</button>
+                    <?php
+                }
+            } else {
+                ?>
+                <button class="neon-btn" id="background-white" value="buy">buy</button>
+                <?php
+            }
             ?>
         </div>
     </div>
