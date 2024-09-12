@@ -11,24 +11,43 @@ $user = $stmt->fetch($_SESSION['userid']);
 if($_POST['function']) {
     switch ($_POST["function"]) {
         case "buy":
-            buy($pdo, $_POST["buying"]);
+            buy($pdo, $user, $_POST["buying"]);
+            $_SESSION['points'] = $_POST['points'];
             break;
         default:
         break;
     }
 }
 
-function buy($pdo, $id) {
+function buy($pdo, $user, $id) {
     [$type, $color] = explode("-", $id);
     switch($type) {
         case "background":
-            $sql = "UPDATE users SET backroundcolor";
+            if (empty($user['backgroundcolor'])) {
+                $user['backgroundcolor'] = 'black';
+            }
+            $colors = $user['backgroundcolor'] . ', ' . $color;
+            $sql = "UPDATE users SET backroundcolor=? WHERE id=?";
             $stmt = $pdo->prepare($sql);
-            $stmt->execute([]);
+            $stmt->execute([$colors, $_SESSION['userid']]);
             break;
         case "cell":
+            if (empty($user['celcolor'])) {
+                $user['celcolor'] = 'grey';
+            }
+            $colors = $user['celcolor'] . ', ' . $color;
+            $sql = "UPDATE users SET celcolor=? WHERE id=?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$colors, $_SESSION['userid']]);
             break;
         case "glow":
+            if (empty($user['color'])) {
+                $user['color'] = 'yellow';
+            }
+            $colors = $user['color'] . ', ' . $color;
+            $sql = "UPDATE users SET color=? WHERE id=?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$colors, $_SESSION['userid']]);
             break;
         default:
             break;
