@@ -31,7 +31,7 @@ error_reporting(0);
 
   <h1 id="name2" style="display:none;">choose grid size</h1>
   <div class="buttons-container" id="newGameMenu" style="display:none;">
-    <form method="post" action="game.php" class="buttons-container">    
+    <form method="post" action="game.php" class="buttons-container-grid">    
       <button class="neon-btn" name="gridsize" value="back" id="backBtn">Back</button>
       <button class="neon-btn" name="gridsize" value="small" id="small">small</button>
       <button class="neon-btn" name="gridsize" value="medium" id="medium">medium</button>
