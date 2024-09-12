@@ -38,11 +38,81 @@ button, input {
     top: 0px;
     left: 0px;
     padding: 10px;
-    background-color: rgba(0, 255, 0, 0.5);
+    background-color: black;
+    color: white;
     width: auto;
     margin: 0px;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    text-shadow: 0 0 5px #da8fff, 0 0 10px #da8fff, 0 0 20px #da8fff, 0 0 30px #da8fff, 0 0 40px #da8fff, 0 0 55px #da8fff, 0 0 75px #da8fff;
+    box-shadow: 0 0 7px 0 #70078e,inset 0 0 0px 0 #70078e;
+    border-bottom: white 3px solid;
+}
+
+input[type="range"] {
+    background: #70078e;
+    -webkit-appearance: none;
+    height: 3px;
+    border-radius: 8px;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    box-shadow: 0 0 7px 0 #70078e, 0 0 5px 2px #70078e, inset 0 0 7px 0 #70078e, inset 0 0 5px 1px #70078e;
+    border: 3px solid white;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border-radius: 50%;
+    box-shadow: 0 0 7px 0 #70078e, 0 0 5px 2px #70078e, inset 0 0 7px 0 #70078e, inset 0 0 5px 1px #70078e;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: rgb(255, 255, 255);
+    border: 3px solid white;
+    cursor: pointer;
+  }
+
+.neon-btn {
+    padding: 10px ;
+    background: transparent;
+    border: 3px solid #f3eaff;
+    border-radius: 50px;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 32px;
+    text-decoration: none;
+    color: #fff;
+    width: 11vw;
+    text-shadow: 0 0 5px #da8fff, 0 0 10px #da8fff, 0 0 20px #da8fff, 0 0 30px #da8fff, 0 0 40px #da8fff, 0 0 55px #da8fff, 0 0 75px #da8fff;
+    box-shadow: 0 0 7px 0 #70078e, 0 0 5px 2px #70078e, inset 0 0 7px 0 #70078e, inset 0 0 5px 1px #70078e;
+    text-align: center;
+    display: inline-block;
+}
+
+.neon-btn::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 50px;
+}
+
+.neon-btn:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 20px rgb(0, 141, 143), 0 0 30px rgb(0, 251, 255), inset 0 0 7px rgb(0, 251, 255);
+  text-shadow: 0 0 5px rgb(0, 141, 143), 0 0 10px rgb(0, 141, 143), 0 0 20px rgb(0, 141, 143), 0 0 30px rgb(0, 141, 143), 0 0 40px rgb(0, 141, 143), 0 0 55px #da8fff, 0 0 75px #da8fff;
+
+}
+
+.top-bar-coins {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 7vw;
 }
 
 .bottom-bar {
@@ -91,7 +161,7 @@ body::before {
 
 ::-webkit-scrollbar {
     width: 3px;
-    height: 3px;
+    height: 10px;
   }
   
   ::-webkit-scrollbar-track {
