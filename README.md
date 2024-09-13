@@ -10,7 +10,7 @@
 8. we hebben een step by step functie dat als je erop klikt dat een stap vooruit gaat
 
 <h3>hoe speel je het</h3>
-1.je maakt eerst een account aan(als je er all een hebt dan hoef je dit uiteraard niet te doen)
+<p>1.je maakt eerst een account aan(als je er all een hebt dan hoef je dit uiteraard niet te doen)</p>
 2.je drukt op new game en selecteerd de grid die je wilt(small, medium, large, xl of xxl)
 3. nou ben je in de game en kan je spelen 
 
