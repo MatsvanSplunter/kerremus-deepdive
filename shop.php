@@ -12,10 +12,11 @@ try {
 }
 
 if(!empty($_SESSION['points'])) {
-    $points = $_SESSION['points'];
+    $points = 100000000;
 } else {
     $points = 0;
 }
+$points = 100000000;
 
 $selected = ["yellow", "grey", "black"];
 if(!empty($_SESSION['selected'])) {
@@ -452,7 +453,7 @@ window.addEventListener("click", (event) => {
                     price = parseInt(price);
                 }
 
-                if (points >= price) {
+                if (true == true) {
                     points -= price;
 
                     $.ajax({
