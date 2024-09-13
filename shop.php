@@ -56,9 +56,21 @@ if(!empty($_SESSION['points'])) {
                 <button class="neon-btn" id="glow-yellow" value="select">select</button>
                 <?php
             }
-            $glow = explode(', ', $user['color']);
-            $cell = explode(', ', $user['celcolor']);
-            $background = explode(', ', $user['backgroundcolor']);
+            if ($user['color']) {
+                $glow = explode(', ', $user['color']);
+            } else {
+                $glow = "";
+            }
+            if ($user['celcolor']) {
+                $cell = explode(', ', $user['celcolor']);
+            } else {
+                $cell = "";
+            }
+            if ($user['backgroundcolor']) {
+                $background = explode(', ', $user['backgroundcolor']);
+            } else {
+                $background = "";
+            }
             ?>
         </div>
         <div class="cards">
