@@ -31,9 +31,9 @@ document.getElementById('backBtn2').addEventListener('click', function () {
   document.getElementById('name3').style.display = 'none';
 });
 
-document.getElementById('loadGameBtn').addEventListener('click', function () {
-  document.getElementById('mainMenu').style.display = 'none';
-  document.getElementById('loadGameMenu').style.display = 'flex';
-  document.getElementById('name').style.display = 'none';
-  document.getElementById('name3').style.display = 'block';
-});
+//document.getElementById('loadGameBtn').addEventListener('click', function () {
+//  document.getElementById('mainMenu').style.display = 'none';
+//  document.getElementById('loadGameMenu').style.display = 'flex';
+//  document.getElementById('name').style.display = 'none';
+//  document.getElementById('name3').style.display = 'block';
+//});
