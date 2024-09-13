@@ -35,6 +35,9 @@ if (isset($_POST['function'])) {
         case "points":
             $_SESSION['points'] = $_POST['points'];
             break;
+        case "savepattern":
+            savepattern();
+            break;
         default:
             echo "Invalid function call.";
             break;
@@ -65,5 +68,26 @@ function buy($pdo, $user, $itemId, $points) {
             break;
     }
     echo "Bought: " . $color;
+}
+
+function savepattern() {
+    $rawpattern = explode(",", $_POST['pattern']);
+    var_dump($rawpattern);
+    $size = explode(",", $_POST['size']);
+    if($size[0] != 0 && $size[1] != 0) {
+        $pattern = [];
+        for ($i = 0; $i < $size[0]; $i++){
+            $y = [];
+            for ($j = 0; $j < $size[1]; $j++){
+                if(str_contains($rawpattern[$j + $i * $size[0]], "true")) {
+                    $y[$j] = "1";
+                } else {
+                    $y[$j] = "0";
+                }
+            }
+            $pattern[$i] = $y;
+        }
+        var_dump($pattern);
+    }
 }
 ?>

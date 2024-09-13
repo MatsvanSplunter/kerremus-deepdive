@@ -10,6 +10,9 @@ let firstcel;
 let lastcel;
 let speed;
 let celsize;
+let savepattern;
+let patternsize;
+let Shiftkeydown;
 
 const bord = [];
 document.querySelectorAll('tr').forEach((tableRow, index) => {
@@ -20,15 +23,24 @@ document.querySelectorAll('tr').forEach((tableRow, index) => {
 addEventListener("mouseup", (e) => {
     mousedown = false;
     firstcel = undefined;
-    console.debug("mouseup");
     $.ajax({
         type: "POST",
         url: "data.php",
-        data: { function: "points", points: points },
+        data: { function: "points", points: parseInt(points) },
         success: function(response) {
             console.log(response);
         }
     });
+    $.ajax({
+        type: "POST",
+        url: "data.php",
+        data: { function: "savepattern", pattern: JSON.stringify(savepattern), size: patternsize },
+        success: function(response) {
+            console.log(response);
+        }
+    });
+    savepattern = [];
+    patternsize = "0,0";
 });
 addEventListener("mousedown", (e) => {
     mousedown = true;
@@ -38,15 +50,13 @@ addEventListener("mousedown", (e) => {
     if (e.target.tagName === "TD") {
         let cell = e.target;
         let [x, y] = cell.id.split(",").map(Number);
-        if (e.button == 0 || e.button == 2) {
+        if ((e.button == 0 || e.button == 2) && !Shiftkeydown) {
             toggleCellState(cell);
         }
-        console.debug("mousedown");
         if (firstcel) {
             return;
         }
         if (!firstcel && e.target.tagName === "TD") {
-            console.debug("setting first cell");
             firstcel = [x, y, bord[x][y].classList];
         }
     }
@@ -88,9 +98,20 @@ document.querySelector("table").addEventListener("mouseover", (event) => {
                 }
             }
             if (mousedown && eb == 0) {
-                points += 1;
-                pointtext.innerHTML = points;
-                toggleCellState(bord[x][y]);
+                if(!Shiftkeydown) {
+                    points += 1;
+                    pointtext.innerHTML = points;
+                    toggleCellState(bord[x][y]);
+                } else {
+                    savepattern = [];
+                    patternsize = "0,0";
+                    for (let celx = cel1[0]; celx <= cel2[0]; celx += 1) {
+                        for (let cely = cel1[1]; cely <= cel2[1]; cely += 1) {
+                            savepattern.push(bord[celx][cely].classList);
+                        }
+                    }
+                    patternsize = `${(cel2[0] - cel1[0])+1},${(cel2[1] - cel1[1])+1}`;
+                }
             }
         }
     }
@@ -170,13 +191,13 @@ document.body.onkeydown = function(e) {
         simulatebutton();
     }
     if (e.key = "Shift") {
-        Shiftkeydown = false;
+        Shiftkeydown = true;
     }
 }
 
 document.body.onkeyup = function(e) {
-    if (e.key = "Shift") {
-        Shiftkeydown = true;
+    if (e.key == "Shift") {
+        Shiftkeydown = false;
     }
 }
 
