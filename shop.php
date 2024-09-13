@@ -38,7 +38,11 @@ if(!empty($_SESSION['points'])) {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <a href="index.php"><button class="neon-btn">back</button></a>
+    <div id="topnav">
+        <a href="index.php"><button class="neon-btn">back</button></a>
+        <div class="top-bar-coins"><p><?=$points?></p><p>ferris-wheels</p></div>
+
+    </div>
     <h1 class="title">Shop</h1>
     <h1>glowing colors</h1>
     <div class="cardrowcolors">
