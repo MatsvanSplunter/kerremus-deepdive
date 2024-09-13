@@ -23,7 +23,6 @@ error_reporting(0);
   <div class="buttons-container" id="mainMenu">
     <?php if ($_SESSION['userid'] != null) { ?>
       <button class="neon-btn" id="newGameBtn">new game</button>
-      <button class="neon-btn" id="loadGameBtn">load game</button>
       <button class="neon-btn" id="shop">shop</button>
     <?php } ?>
     <button class="neon-btn" id="login" <?php if ($_SESSION['userid'] != null) { echo 'style="display:none;"'; } ?>>Login/register</button>
