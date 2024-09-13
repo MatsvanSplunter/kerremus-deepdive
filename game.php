@@ -80,6 +80,8 @@ $celsize = 25;
     <div class="top-bar">
         <button class="neon-btn" onclick="simulatebutton()">Simulate</button>
         <button class="neon-btn" onclick="simulate()">Step</button>
+        <button class="neon-btn" onclick="reset()">reset</button>
+        <button class="neon-btn" onclick="randomize()">randomize</button>
         <div class="range-container">
         <i class='bx bx-timer bx-md'></i>
         <input type="range" min="1" max="100" id="speed">

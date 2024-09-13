@@ -272,3 +272,23 @@ sizeslider.addEventListener("change", () => {
     document.documentElement.style.setProperty('--cell-size', sizeslider.value + 'px');
 });
 
+function reset() {
+    bord.forEach((row) => {
+        row.forEach((cel) => {
+            cel.classList = "false";
+        });
+    });
+}
+
+function randomize() {
+    bord.forEach((row) => {
+        row.forEach((cel) => {
+            if(Math.floor(Math.random() * 2) == 1) {
+                cel.classList = "true";
+            } else {
+                cel.classList = "false";
+            }
+        });
+    });
+}
+
