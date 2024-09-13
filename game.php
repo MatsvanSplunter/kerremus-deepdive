@@ -1,8 +1,19 @@
 <?php
 
+include("connect.php");
 session_start();
-
 $patterns = [];
+
+try {
+    $stmt = $pdo->prepare("SELECT * FROM user WHERE id = ?");
+    $stmt->execute([$_SESSION['userid']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt = $pdo->prepare("SELECT * FROM patternsaves WHERE userid = ?");
+    $stmt->execute([$_SESSION['userid']]);
+    $patterns = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
 
 if(!empty($_SESSION['selected'])) {
     [$cell_glow, $cell_color , $background_color] = $_SESSION['selected'];
@@ -51,16 +62,6 @@ if ($_POST['gridsize']) {
     }
 }
 
-function parsebool($int) {
-    if($int == 1) {
-        return true;
-    } else if($int == 0) {
-        return false;
-    } else {
-        return "not a bool number";
-    }
-}
-
 $celsize = 25;
 ?>
 <!DOCTYPE html>
@@ -91,14 +92,14 @@ $celsize = 25;
         <div class="top-bar-coins"><p><?=$points?></p><p>ferris-wheels</p></div>
     </div>
     <script>
-        const width = <?= $width ?>;
-        const height = <?= $height ?>;
+        const mapwidth = <?= $width ?>;
+        const mapheight = <?= $height ?>;
         table = document.createElement('table');
         table.classList.add('grid');
         let tableHTML = '';
-        for (let row = 0; row < height; row++) {
+        for (let row = 0; row < mapheight; row++) {
             tableHTML += "<tr>";
-            for (let col = 0; col < width; col++) {
+            for (let col = 0; col < mapwidth; col++) {
                 tableHTML += `<td class='false' id='${row},${col}'></td>`;
             }
             tableHTML += "</tr>";
@@ -111,7 +112,7 @@ $celsize = 25;
         document.documentElement.style.setProperty('--background-color', "<?=$background_color?>");
         document.documentElement.style.setProperty('--cell-size', '25px');
     </script>
-    <div class="bottom-bar">
+    <div class="bottom-bar" id="bottom-bar">
         <?php
         if($patterns == []) {
             ?>
@@ -121,33 +122,52 @@ $celsize = 25;
     } else {
         ?>
         <script>
-            let bottombar = document.getElementsByClassName("bottom-bar");
+            let bottombar = document.getElementById("bottom-bar");
+            let [breedte, hoogte] = [];
+            let patternbord = [];
+            let pattern;
         </script>
         <?php
         foreach($patterns as $pattern) {
-            $patternbord = [];
-            foreach (explode(".", $pattern['pattern']) as $index => $patter){
-                $patternbord[$index] = explode("", $patter);
-            }
+            $patternsize = explode('.', $pattern['gamesize']);
             ?>
-            <div>
                 <script>
-                    const [width, height] = [<?=explode(", ", $pattern['gamesize'])?>];
-                    let patternbord = <?=$patternbord?>;
+                    function parsebool(value) {
+                        if (value == "1" || value == 1) {
+                            return true;
+                        } else if (value == "0" || value == 0) {
+                            return false;
+                        } else {
+                            return "not a bool number";
+                        }
+                    }
+
+                    [breedte, hoogte] = [<?=$patternsize[0]?>, <?=$patternsize[1]?>];
+                    pattern = "<?=$pattern['pattern']?>";
+                    pattern = pattern.split("");
+                    for(let i = 0; i < hoogte; i += 1) {
+                        let y = [];
+                        for(let j = 0; j < breedte; j += 1) {
+                            y[j] = pattern[j + i * <?=$patternsize[0]?>];
+                        }
+                        patternbord[i] = y;
+                    }
+                    card = document.createElement('div');
+                    card.classList = "card";
                     table = document.createElement('table');
                     table.classList.add('grid');
                     tableHTML = '';
-                    for (let row = 0; row < height; row++) {
+                    for (let row = 0; row < hoogte; row += 1) {
                         tableHTML += "<tr>";
-                        for (let col = 0; col < width; col++) {
-                            tableHTML += `<td class='pattern <?=parsebool($patternbord[$row][$col])?>' id='${row},${col}'></td>`;
+                        for (let col = 0; col < breedte; col += 1) {
+                            tableHTML += `<td class='${parsebool(patternbord[row][col])} patterncel' id='${row},${col}'></td>`;
                         }
                         tableHTML += "</tr>";
                     }
-                    bottombar.appendChild(table);
+                    card.appendChild(table);
+                    bottombar.appendChild(card);
                     table.innerHTML = tableHTML;
                 </script>
-            </div>
             <?php
         }
     }
