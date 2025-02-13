@@ -1,19 +1,8 @@
 <?php
 
-include("connect.php");
 session_start();
-$patterns = [];
 
-try {
-    $stmt = $pdo->prepare("SELECT * FROM user WHERE id = ?");
-    $stmt->execute([$_SESSION['userid']]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    $stmt = $pdo->prepare("SELECT * FROM patternsaves WHERE userid = ?");
-    $stmt->execute([$_SESSION['userid']]);
-    $patterns = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
-}
+$patterns = [];
 
 if(!empty($_SESSION['selected'])) {
     [$cell_glow, $cell_color , $background_color] = $_SESSION['selected'];
@@ -62,6 +51,16 @@ if ($_POST['gridsize']) {
     }
 }
 
+function parsebool($int) {
+    if($int == 1) {
+        return true;
+    } else if($int == 0) {
+        return false;
+    } else {
+        return "not a bool number";
+    }
+}
+
 $celsize = 25;
 ?>
 <!DOCTYPE html>
@@ -80,8 +79,6 @@ $celsize = 25;
     <div class="top-bar">
         <button class="neon-btn" onclick="simulatebutton()">Simulate</button>
         <button class="neon-btn" onclick="simulate()">Step</button>
-        <button class="neon-btn" onclick="reset()">reset</button>
-        <button class="neon-btn" onclick="randomize()">randomize</button>
         <div class="range-container">
         <i class='bx bx-timer bx-md'></i>
         <input type="range" min="1" max="100" id="speed">
@@ -94,14 +91,14 @@ $celsize = 25;
         <div class="top-bar-coins"><p><?=$points?></p><p>ferris-wheels</p></div>
     </div>
     <script>
-        const mapwidth = <?= $width ?>;
-        const mapheight = <?= $height ?>;
+        const width = <?= $width ?>;
+        const height = <?= $height ?>;
         table = document.createElement('table');
         table.classList.add('grid');
         let tableHTML = '';
-        for (let row = 0; row < mapheight; row++) {
+        for (let row = 0; row < height; row++) {
             tableHTML += "<tr>";
-            for (let col = 0; col < mapwidth; col++) {
+            for (let col = 0; col < width; col++) {
                 tableHTML += `<td class='false' id='${row},${col}'></td>`;
             }
             tableHTML += "</tr>";
@@ -114,7 +111,7 @@ $celsize = 25;
         document.documentElement.style.setProperty('--background-color', "<?=$background_color?>");
         document.documentElement.style.setProperty('--cell-size', '25px');
     </script>
-    <div class="bottom-bar" id="bottom-bar">
+    <div class="bottom-bar">
         <?php
         if($patterns == []) {
             ?>
@@ -124,52 +121,33 @@ $celsize = 25;
     } else {
         ?>
         <script>
-            let bottombar = document.getElementById("bottom-bar");
-            let [breedte, hoogte] = [];
-            let patternbord = [];
-            let pattern;
+            let bottombar = document.getElementsByClassName("bottom-bar");
         </script>
         <?php
         foreach($patterns as $pattern) {
-            $patternsize = explode('.', $pattern['gamesize']);
+            $patternbord = [];
+            foreach (explode(".", $pattern['pattern']) as $index => $patter){
+                $patternbord[$index] = explode("", $patter);
+            }
             ?>
+            <div>
                 <script>
-                    function parsebool(value) {
-                        if (value == "1" || value == 1) {
-                            return true;
-                        } else if (value == "0" || value == 0) {
-                            return false;
-                        } else {
-                            return "not a bool number";
-                        }
-                    }
-
-                    [breedte, hoogte] = [<?=$patternsize[0]?>, <?=$patternsize[1]?>];
-                    pattern = "<?=$pattern['pattern']?>";
-                    pattern = pattern.split("");
-                    for(let i = 0; i < hoogte; i += 1) {
-                        let y = [];
-                        for(let j = 0; j < breedte; j += 1) {
-                            y[j] = pattern[j + i * <?=$patternsize[0]?>];
-                        }
-                        patternbord[i] = y;
-                    }
-                    card = document.createElement('div');
-                    card.classList = "card";
+                    const [width, height] = [<?=explode(", ", $pattern['gamesize'])?>];
+                    let patternbord = <?=$patternbord?>;
                     table = document.createElement('table');
                     table.classList.add('grid');
                     tableHTML = '';
-                    for (let row = 0; row < hoogte; row += 1) {
+                    for (let row = 0; row < height; row++) {
                         tableHTML += "<tr>";
-                        for (let col = 0; col < breedte; col += 1) {
-                            tableHTML += `<td class='${parsebool(patternbord[row][col])} patterncel' id='${row},${col}'></td>`;
+                        for (let col = 0; col < width; col++) {
+                            tableHTML += `<td class='pattern <?=parsebool($patternbord[$row][$col])?>' id='${row},${col}'></td>`;
                         }
                         tableHTML += "</tr>";
                     }
-                    card.appendChild(table);
-                    bottombar.appendChild(card);
+                    bottombar.appendChild(table);
                     table.innerHTML = tableHTML;
                 </script>
+            </div>
             <?php
         }
     }
