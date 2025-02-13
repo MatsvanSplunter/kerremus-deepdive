@@ -51,7 +51,7 @@ error_reporting(0);
 </div>
 
 </div>
-<script src="index.js"></script>
 </body>
+<script src="index.js"></script>
 
 </html>
