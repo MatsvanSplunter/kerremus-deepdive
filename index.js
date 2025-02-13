@@ -13,7 +13,7 @@ document.getElementById('shop').addEventListener('click', function () {
 document.getElementById('newGameBtn').addEventListener('click', function () {
   document.getElementById('mainMenu').style.display = 'none';
   document.getElementById('newGameMenu').style.display = 'flex';
-  //document.getElementById('name').style.display = 'none';
+  document.getElementById('name').style.display = 'none';
   document.getElementById('name2').style.display = 'block';
 });
 
