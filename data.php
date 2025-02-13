@@ -72,7 +72,7 @@ function buy($pdo, $user, $itemId, $points) {
 }
 
 function savepattern($pdo) {
-    $size = explode(".", $_POST['size']);
+    $size = explode("x", $_POST['size']);
     if($size[0] != 0 && $size[1] != 0) {
         $pattern = "";
         foreach($_POST['pattern'] as $cel) {
@@ -85,14 +85,13 @@ function savepattern($pdo) {
         }
         $sql = "INSERT INTO patternsaves (pattern, gamesize, userid) VALUES (?,?,?)";
         $stmt = $pdo->prepare($sql);
-        $size = join(".", $size);
-        $stmt->execute([$pattern, $size, $_SESSION['userid']]);
+        $stmt->execute([$pattern, $_POST['size'], $_SESSION['userid']]);
     }
 }
 
 function savegame($pdo) {
     $rawpattern = explode(",", $_POST['pattern']);
-    $size = explode(".", $_POST['size']);
+    $size = explode("x", $_POST['size']);
     $pattern = [];
     for ($i = 0; $i < $size[1]; $i++){
         $y = [];

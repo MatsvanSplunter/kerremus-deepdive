@@ -44,7 +44,7 @@ addEventListener("mouseup", (e) => {
         });
     }
     savepattern = [];
-    patternsize = "0.0";
+    patternsize = "0x0";
 });
 addEventListener("mousedown", (e) => {
     mousedown = true;
@@ -148,14 +148,14 @@ document.querySelector("table").addEventListener("mouseover", (event) => {
                     toggleCellState(bord[x][y]);
                 } else {
                     savepattern = [];
-                    patternsize = "0,0";
+                    patternsize = "0x0";
                     for (let celx = cel1[0]; celx <= cel2[0]; celx += 1) {
                         for (let cely = cel1[1]; cely <= cel2[1]; cely += 1) {
                             savepattern.push(bord[celx][cely].classList.value);
                         }
                     }
                     console.log(savepattern);
-                    patternsize = `${(cel2[1] - cel1[1])+1}.${(cel2[0] - cel1[0])+1}`;
+                    patternsize = `${(cel2[1] - cel1[1])+1}x${(cel2[0] - cel1[0])+1}`;
                 }
             }
         }

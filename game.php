@@ -131,7 +131,7 @@ $celsize = 25;
         </script>
         <?php
         foreach($patterns as $pattern) {
-            $patternsize = explode('.', $pattern['gamesize']);
+            $patternsize = explode('x', $pattern['gamesize']);
             ?>
                 <script>
                     function parsebool(value) {
@@ -162,7 +162,7 @@ $celsize = 25;
                     for (let row = 0; row < hoogte; row += 1) {
                         tableHTML += "<tr>";
                         for (let col = 0; col < breedte; col += 1) {
-                            tableHTML += `<td class='${parsebool(patternbord[row][col])} patterncel' id='${row},${col}'></td>`;
+                            tableHTML += `<td class='${parsebool(patternbord[row][col])} patterncel' id='${row}x${col}'></td>`;
                         }
                         tableHTML += "</tr>";
                     }
