@@ -13,11 +13,9 @@ let celsize;
 let savepattern;
 let patternsize;
 let Shiftkeydown;
-let selectedpattern;
 
 const bord = [];
-let tabel = document.querySelector("table");
-tabel.querySelectorAll('tr').forEach((tableRow, index) => {
+document.querySelectorAll('tr').forEach((tableRow, index) => {
     const cellenInRow = tableRow.querySelectorAll('td');
     bord[index] = Array.from(cellenInRow);
 });
@@ -30,80 +28,38 @@ addEventListener("mouseup", (e) => {
         url: "data.php",
         data: { function: "points", points: parseInt(points) },
         success: function(response) {
-            //console.log(response);
+            console.log(response);
         }
     });
-    if(savepattern){
-        $.ajax({
-            type: "POST",
-            url: "data.php",
-            data: { function: "savepattern", pattern: savepattern, size: patternsize },
-            success: function(response) {
-                console.log(response);
-            }
-        });
-    }
+    $.ajax({
+        type: "POST",
+        url: "data.php",
+        data: { function: "savepattern", pattern: JSON.stringify(savepattern), size: patternsize },
+        success: function(response) {
+            console.log(response);
+        }
+    });
     savepattern = [];
-    patternsize = "0.0";
+    patternsize = "0,0";
 });
 addEventListener("mousedown", (e) => {
     mousedown = true;
     eb = e.button;
     points += 1;
     pointtext.innerHTML = points;
-    if (e.target.tagName === "TD" && e.target.classList.value.includes("patterncel") == false) {
+    if (e.target.tagName === "TD") {
         let cell = e.target;
         let [x, y] = cell.id.split(",").map(Number);
-        if (selectedpattern) {
-            console.log(selectedpattern);
-            selectedpattern.style.backgroundColor = "transparent";
-            let pattern = selectedpattern.children[0];
-            pattern = pattern.children[0];
-            for (let i = 0; i < pattern.children.length; i += 1) {
-                let tr = pattern.children[i];
-                for (let j = 0; j < tr.children.length; j += 1) {
-                    let td = tr.children[j];
-                    bord[x + i][y + j].classList = td.classList.value.split(" ")[0];
-                    console.log(td.classList.value);
-                }
-            }
-        }
-        if ((e.button == 0 || e.button == 2) && !Shiftkeydown && !selectedpattern) {
+        if ((e.button == 0 || e.button == 2) && !Shiftkeydown) {
             toggleCellState(cell);
         }
-        if (firstcel && !selectedpattern) {
+        if (firstcel) {
             return;
         }
-        if (!firstcel && e.target.tagName === "TD" && !selectedpattern) {
+        if (!firstcel && e.target.tagName === "TD") {
             firstcel = [x, y, bord[x][y].classList];
         }
-        if (selectedpattern) {
-            selectedpattern = undefined;
-        }
-    } else if (
-        e.target.tagName === "TD" ||
-        e.target.tagName === "TBODY" ||
-        e.target.classList.contains("card")
-      ) {
-        let element = e.target;
-        
-        while (element && !element.classList.contains("card")) {
-            element = element.parentElement;
-          
-          if (!element || element.tagName === "BODY") {
-            console.log("this is not a saved pattern");
-            break;
-          } else if (element.classList.contains("card")) {
-            let cards = Array.from(document.getElementsByClassName("card"));
-            cards.forEach((card) => {
-                card.style.backgroundColor = "transparent";
-            });
-            element.style.backgroundColor = "yellow";
-            selectedpattern = element;
-            break;
-          }
-        }
-      }
+    }
 });
 
 document.querySelector("table").addEventListener("mouseover", (event) => {
@@ -151,11 +107,10 @@ document.querySelector("table").addEventListener("mouseover", (event) => {
                     patternsize = "0,0";
                     for (let celx = cel1[0]; celx <= cel2[0]; celx += 1) {
                         for (let cely = cel1[1]; cely <= cel2[1]; cely += 1) {
-                            savepattern.push(bord[celx][cely].classList.value);
+                            savepattern.push(bord[celx][cely].classList);
                         }
                     }
-                    console.log(savepattern);
-                    patternsize = `${(cel2[1] - cel1[1])+1}.${(cel2[0] - cel1[0])+1}`;
+                    patternsize = `${(cel2[0] - cel1[0])+1},${(cel2[1] - cel1[1])+1}`;
                 }
             }
         }
@@ -170,6 +125,7 @@ function simulate() {
             let omringt = countNeighbors(x, y);
             let cel = bord[x][y];
             if (cel.classList == "false") {
+                console.log(omringt);
                 if (omringt == 3) {
                     celchange.push(cel);
                 }
@@ -271,24 +227,3 @@ speedslider.addEventListener("mousemove", (e) => {
 sizeslider.addEventListener("change", () => {
     document.documentElement.style.setProperty('--cell-size', sizeslider.value + 'px');
 });
-
-function reset() {
-    bord.forEach((row) => {
-        row.forEach((cel) => {
-            cel.classList = "false";
-        });
-    });
-}
-
-function randomize() {
-    bord.forEach((row) => {
-        row.forEach((cel) => {
-            if(Math.floor(Math.random() * 2) == 1) {
-                cel.classList = "true";
-            } else {
-                cel.classList = "false";
-            }
-        });
-    });
-}
-

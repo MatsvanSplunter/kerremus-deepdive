@@ -1,5 +1,4 @@
 <?php
-
 include("connect.php");
 session_start();
 
@@ -72,42 +71,26 @@ function buy($pdo, $user, $itemId, $points) {
 }
 
 function savepattern($pdo) {
-    $size = explode(".", $_POST['size']);
+    $rawpattern = explode(",", $_POST['pattern']);
+    var_dump($rawpattern);
+    $size = explode(",", $_POST['size']);
     if($size[0] != 0 && $size[1] != 0) {
-        $pattern = "";
-        foreach($_POST['pattern'] as $cel) {
-            echo $cel;
-            if($cel == "true") {
-                $pattern .= "1";
-            } else {
-                $pattern .= "0";
+        $pattern = [];
+        for ($i = 0; $i < $size[0]; $i++){
+            $y = [];
+            for ($j = 0; $j < $size[1]; $j++){
+                if(str_contains($rawpattern[$j + $i * $size[0]], "true")) {
+                    $y[$j] = "1";
+                } else {
+                    $y[$j] = "0";
+                }
             }
+            $pattern[$i] = join($y);
         }
+        $pattern = join($pattern);
         $sql = "INSERT INTO patternsaves (pattern, gamesize, userid) VALUES (?,?,?)";
         $stmt = $pdo->prepare($sql);
-        $size = join(".", $size);
-        $stmt->execute([$pattern, $size, $_SESSION['userid']]);
+        $stmt->execute([$pattern, join(".", $size), $_SESSION['userid']]);
     }
-}
-
-function savegame($pdo) {
-    $rawpattern = explode(",", $_POST['pattern']);
-    $size = explode(".", $_POST['size']);
-    $pattern = [];
-    for ($i = 0; $i < $size[1]; $i++){
-        $y = [];
-        for ($j = 0; $j < $size[0]; $j++){
-            if(str_contains($rawpattern[$j + $i * $size[0]], "true")) {
-                $y[$j] = "1";
-            } else {
-                $y[$j] = "0";
-            }
-        }
-        $pattern[$i] = join($y);
-    }
-    $pattern = join($pattern);
-    $sql = "INSERT INTO patternsaves (bord, gamesize, userid) VALUES (?,?,?)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$pattern, $_POST['size'], $_SESSION['userid']]);
 }
 ?>

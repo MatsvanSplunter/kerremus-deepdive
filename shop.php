@@ -12,11 +12,10 @@ try {
 }
 
 if(!empty($_SESSION['points'])) {
-    $points = 100000000;
+    $points = $_SESSION['points'];
 } else {
     $points = 0;
 }
-$points = 100000000;
 
 $selected = ["yellow", "grey", "black"];
 if(!empty($_SESSION['selected'])) {
@@ -39,11 +38,7 @@ if(!empty($_SESSION['points'])) {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <div id="topnav">
-        <a href="index.php"><button class="neon-btn">back</button></a>
-        <div class="top-bar-coins"><p><?=$points?></p><p>ferris-wheels</p></div>
-
-    </div>
+    <a href="index.php"><button class="neon-btn">back</button></a>
     <h1 class="title">Shop</h1>
     <h1>glowing colors</h1>
     <div class="cardrowcolors">
@@ -61,21 +56,9 @@ if(!empty($_SESSION['points'])) {
                 <button class="neon-btn" id="glow-yellow" value="select">select</button>
                 <?php
             }
-            if ($user['color']) {
-                $glow = explode(', ', $user['color']);
-            } else {
-                $glow = "";
-            }
-            if ($user['celcolor']) {
-                $cell = explode(', ', $user['celcolor']);
-            } else {
-                $cell = "";
-            }
-            if ($user['backgroundcolor']) {
-                $background = explode(', ', $user['backgroundcolor']);
-            } else {
-                $background = "";
-            }
+            $glow = explode(', ', $user['color']);
+            $cell = explode(', ', $user['celcolor']);
+            $background = explode(', ', $user['backgroundcolor']);
             ?>
         </div>
         <div class="cards">
@@ -457,7 +440,7 @@ window.addEventListener("click", (event) => {
                     price = parseInt(price);
                 }
 
-                if (true == true) {
+                if (points >= price) {
                     points -= price;
 
                     $.ajax({
