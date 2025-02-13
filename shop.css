@@ -22,6 +22,21 @@ body::before {
     z-index: -1; /* Make sure background stays behind content */
 }
 
+#topnav {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-bar-coins {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 /* Keyframes for the carousel */
 @keyframes carousel {
     0% {
@@ -125,4 +140,24 @@ body::before {
 img {
     width: 44px;
     height: 44px;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgb(0, 0, 0); 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  box-shadow: 0 0 20px rgb(0, 141, 143), 0 0 30px rgb(0, 251, 255), inset 0 0 7px rgb(0, 251, 255);
+  text-shadow: 0 0 5px rgb(0, 141, 143), 0 0 10px rgb(0, 141, 143), 0 0 20px rgb(0, 141, 143), 0 0 30px rgb(0, 141, 143), 0 0 40px rgb(0, 141, 143), 0 0 55px #da8fff, 0 0 75px #da8fff;
+  background: white; 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #70078e; 
 }

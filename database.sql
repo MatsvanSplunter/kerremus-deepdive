@@ -16,7 +16,7 @@ CREATE TABLE `user`(
 CREATE TABLE patternsaves(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     pattern TEXT NOT NULL,
-    gamesize INT NOT NULL,
+    gamesize TEXT NOT NULL,
     userid INT NOT NULL
 );
 
